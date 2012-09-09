@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard 
+    xmlns="urn:switchyard-config:switchyard:1.0" 
+    xmlns:camel="urn:switchyard-component-camel:config:1.0"
+    xmlns:rules="urn:switchyard-component-rules:config:1.0" 
+    xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" 
+    xmlns:transform="urn:switchyard-config:transform:1.0"
+    xmlns:soap="urn:switchyard-component-soap:config:1.0"
+    xmlns:bean="urn:switchyard-component-bean:config:1.0"
+    name="submitSMS" 
+    targetNamespace="urn:org.jboss.gpse:submitSMS:0.0.1-SNAPSHOT">
+
+  <sca:composite name="submitSMS" targetNamespace="urn:org.jboss.gpse:submitSMS:0.0.1-SNAPSHOT">
+
+
+    <sca:service name="SubmitSMSviaJMS" promote="submitSMSComponent/ISubmitSMS">
+        <camel:binding.jms>
+            <camel:operationSelector operationName="acceptSMS"/>
+            <camel:queue>${org.jboss.gpse.submitSMS.queue}</camel:queue>
+            <camel:connectionFactory>#ConnectionFactory</camel:connectionFactory>
+        </camel:binding.jms>
+    </sca:service>
+
+    <sca:component name="submitSMSComponent">
+        <bean:implementation.bean class="org.jboss.gpse.submitSMS.SubmitSMSBean"/>
+        <sca:service name="ISubmitSMS">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.ISubmitSMS"/>
+        </sca:service>
+        <sca:reference name="ISMSRequestValidation">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.ISMSRequestValidation"/>
+        </sca:reference>
+        <sca:reference name="IRoutingService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IRoutingService"/>
+        </sca:reference>
+    </sca:component>
+
+    <sca:component name="smsRequestValidation">
+        <rules:implementation.rules agent="false" >
+            <rules:action name="executeValidation" type="EXECUTE"/>
+            <rules:resource location="smsRequestValidation.drl" type="DRL"/>
+        </rules:implementation.rules>
+        <sca:service name="ISMSRequestValidation">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.ISMSRequestValidation"/>
+        </sca:service>
+    </sca:component>
+
+    <sca:component name="routingService">
+        <implementation.camel xmlns="urn:switchyard-component-camel:config:1.0">
+            <route xmlns="http://camel.apache.org/schema/spring">
+                <to uri="switchyard://IDestinationService"/>
+                <choice>
+                    <when>
+                        <simple>${body.destination} == 'Red'</simple>
+                        <to uri="switchyard://IRedService"/>
+                    </when>
+                    <when>
+                        <simple>${body.destination} == 'Green'</simple>
+                        <to uri="switchyard://IGreenService"/>
+                    </when>
+                    <otherwise>
+                        <log message="Unknown Destination!"/>
+                    </otherwise>
+                </choice>
+            </route>
+        </implementation.camel>
+        <sca:service name="IRoutingService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IRoutingService"/>
+        </sca:service>
+        <sca:reference name="IDestinationService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IDestinationService"/>
+        </sca:reference>
+        <sca:reference name="IRedService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IRedService"/>
+        </sca:reference>
+        <sca:reference name="IGreenService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IGreenService"/>
+        </sca:reference>
+    </sca:component>
+
+    <sca:component name="DestinationService">
+        <implementation.rules xmlns="urn:switchyard-component-rules:config:1.0" agent="false" clock="REALTIME" eventProcessing="CLOUD" multithreadEvaluation="false">
+            <action name="determineDestination" type="EXECUTE"/>
+            <resource location="destinationServiceRules.drl" type="DRL"/>
+        </implementation.rules>
+        <sca:service name="IDestinationService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IDestinationService"/>
+        </sca:service>
+    </sca:component>
+    <sca:component name="GreenService">
+        <bean:implementation.bean class="org.jboss.gpse.submitSMS.GreenServiceBean"/>
+        <sca:service name="IGreenService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IGreenService"/>
+        </sca:service>
+    </sca:component>
+    <sca:component name="RedService">
+        <bean:implementation.bean class="org.jboss.gpse.submitSMS.RedServiceBean"/>
+        <sca:service name="IRedService">
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.IRedService"/>
+        </sca:service>
+    </sca:component>
+
+
+
+    
+
+
+    <!--sca:service name="SubmitSMSPortType" promote="SubmitSMS/SubmitSMS">
+        <sca:interface.wsdl interface="wsdl/submitSMS.wsdl#wsdl.porttype(SubmitSMSPortType)"/>
+        <soap:binding.soap>
+            <soap:wsdl>wsdl/submitSMS.wsdl</soap:wsdl>
+            <soap:socketAddr>:18001</soap:socketAddr>
+            <soap:contextPath>submitSMS</soap:contextPath>
+        </soap:binding.soap>
+    </sca:service -->
+
+    <!--sca:service name="SubmitSMSviaFile" promote="SubmitSMS/SubmitSMS">
+      <camel:binding.file>
+        <contextMapper/>
+        <camel:operationSelector operationName="health"/>
+        <camel:directory>/tmp</camel:directory>
+        <camel:autoCreate>true</camel:autoCreate>
+        <camel:fileName>test.txt</camel:fileName>
+        <camel:consume>
+          <camel:preMove>.working</camel:preMove>
+          <camel:moveFailed>.failed</camel:moveFailed>
+        </camel:consume>
+      </camel:binding.file>
+    </sca:service -->
+
+    <!--sca:service name="SubmitSMSviaFile2" promote="SubmitSMS/SubmitSMS">
+      <camel:binding.file>
+        <contextMapper/>
+        <camel:operationSelector operationName="health"/>
+        <camel:directory>/tmp</camel:directory>
+        <camel:autoCreate>true</camel:autoCreate>
+        <camel:fileName>test2.txt</camel:fileName>
+        <camel:consume>
+          <camel:preMove>.working</camel:preMove>
+          <camel:moveFailed>.failed</camel:moveFailed>
+        </camel:consume> 
+      </camel:binding.file>
+    </sca:service -->
+
+  </sca:composite>
+
+  <transforms >
+    <transform:transform.jaxb 
+        from="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}SMSReq" 
+        to="java:org.jboss.gpse.submitSMS.SMS"
+        contextPath="org.jboss.gpse.submitSMS"
+    />
+    <transform:transform.jaxb 
+        from="java:org.jboss.gpse.submitSMS.SMSResponse" 
+        to="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}SMSResponse" 
+        contextPath="org.jboss.gpse.submitSMS"/>
+  </transforms>
+
+</switchyard>

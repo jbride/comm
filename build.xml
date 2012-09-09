@@ -1,0 +1,21 @@
+<project name="comm" default="all" >
+    <property environment="ENV"/>
+
+    <property file="build.properties" />
+    <import file="${development.base}/base-build.xml"/>
+
+    <macrodef name="iterate">
+        <attribute name="target"/>
+        <sequential>
+            <subant target="@{target}">
+                <fileset dir="domain" includes="build.xml"/>
+                <fileset dir="submitSMS" includes="build.xml"/>
+                <fileset dir="submitMMS" includes="*/build.xml"/>
+            </subant>
+        </sequential>
+    </macrodef>
+
+    <target name="all"><iterate target="all"/></target>
+    <target name="clean"><iterate target="clean"/></target>
+
+</project>

@@ -1,0 +1,53 @@
+<project name="submitSMS" default="all" basedir="." >
+
+    <property environment="ENV"/>
+    <property file="../build.properties" />
+    <path id="classpath" >
+        <path refid="initial.classpath" />
+    </path>
+    <import file="${development.base}/base-build.xml"/>
+
+    <target name="all" >
+        <antcall target="clean" />
+        <antcall target="cli.batch" >
+            <param name="cli.source.dir" value="src/main/resources"/>
+            <param name="cli.to.filter.and.execute" value="project-config.cli"/>
+            <param name="cli.fail.on.error" value="false"/>
+        </antcall>
+        <antcall target="jar" >
+            <param name="jar.name" value="${vendor.name}-${ant.project.name}" />
+        </antcall>
+        <antcall target="cli.command" >
+            <param name="cli.command" value="deploy ${build.dir}/${vendor.name}-${ant.project.name}.jar --force "/>
+        </antcall>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+    </target>
+
+    <target name="send.SMS.via.jms" depends="clean" description="">
+        <mkdir dir="${build.dir}" />
+        <javac debug="true" srcdir="src/test/java" destdir="${build.dir}" optimize="true" >
+            <classpath refid="classpath" />
+        </javac>
+        <antcall target="filter" >
+            <param name="source.dir" value="src/test/resources" />
+            <param name="dest.dir" value="${build.dir}" />
+        </antcall>
+
+        <path id="test.classpath" >
+            <path refid="classpath" />
+            <pathelement location="${build.dir}" />
+        </path>
+
+        <java fork="yes" classname="org.jboss.gpse.submitSMS.SimpleProducer" failonerror="true">
+            <jvmarg value="-Xms16m" />
+            <jvmarg value="-Xmx64m" />
+            <jvmarg value="-Xss164k" />
+            <sysproperty key="log4j.configuration" value="file:src/test/resources/log4j.xml" />
+            <classpath refid="test.classpath"/>
+        </java>
+    </target>
+
+</project>

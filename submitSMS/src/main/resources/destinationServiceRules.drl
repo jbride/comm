@@ -1,0 +1,20 @@
+package org.jboss.gpse.submitSMS
+
+global org.switchyard.Exchange exchange;
+
+import org.jboss.gpse.submitSMS.SMS;
+import org.jboss.gpse.submitSMS.SMSResponse;
+
+rule "Red Destination"
+    when
+        $sms : SMS(cpid > 100)
+    then
+        $sms.setDestination("Red");
+end
+
+rule "Green Destination"
+    when
+        $sms : SMS(cpid < 100)
+    then
+        $sms.setDestination("Green");
+end

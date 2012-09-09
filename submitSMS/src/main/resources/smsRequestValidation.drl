@@ -1,0 +1,36 @@
+package org.jboss.gpse.submitSMS
+
+import org.jboss.gpse.submitSMS.SMS;
+import org.jboss.gpse.submitSMS.SMSResponse;
+
+rule "textLengthCorrect"
+    when
+        $smsObj : SMS(text != null && text.length() > 0)
+    then
+        $smsObj.getSmsResponse().setErrorCode(SMSResponse.STATUS_GOOD);
+        System.out.println("validateText() : text size = "+$smsObj.getText().length());
+end
+
+rule "textLengthNotCorrect"
+    when
+        $smsObj : SMS(text == null || text.length() == 0)
+    then
+        $smsObj.getSmsResponse().setErrorCode(SMSResponse.STATUS_BAD);
+        System.out.println("textLengthNotCorrect() : text is null or of length 0");
+end
+
+rule "smsNotExist"
+    when
+        not( SMS() ) 
+    then
+        System.out.println("smsNotExist() ");
+end
+
+rule "sanityCheck"
+    dialect "mvel"
+
+    when
+        eval(false)
+    then
+        System.out.println("sanityCheck() great success!!");
+end
