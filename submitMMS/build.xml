@@ -8,6 +8,14 @@
 
     <target name="all" >
         <antcall target="clean" />
+        <antcall target="jar" >
+            <param name="jar.name" value="${vendor.name}-${ant.project.name}" />
+        </antcall>
+        <antcall target="cli.command" >
+            <param name="cli.command" value="deploy ${build.dir}/${vendor.name}-${ant.project.name}.jar --force "/>
+        </antcall>
+
+        <antcall target="clean" />
         <antcall target="war" >
             <param name="war.name" value="${vendor.name}-${ant.project.name}-war" />
         </antcall>

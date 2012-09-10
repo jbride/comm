@@ -1,5 +1,8 @@
 package org.jboss.gpse.submitMMS;
 
+import java.io.*;
+import java.net.*;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -11,9 +14,9 @@ import org.apache.log4j.Logger;
 
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
-public class SubmitMMSBean implements ISubmitMMS {
+public class WSSubmitMMS implements IWSSubmitMMS {
 
-    private Logger log = Logger.getLogger("SubmitMMSBean");
+    private Logger log = Logger.getLogger("WSSubmitMMS");
 
     @WebMethod
     public void acceptMMS() {
@@ -22,7 +25,7 @@ public class SubmitMMSBean implements ISubmitMMS {
         try {
             context.addRoutes(new RouteBuilder() {
                 public void configure(){
-                    from("switchyard://IRedService");
+                    from("direct-vm:submitMMSComponentFromDirectVM");
                 }
             });
             

@@ -10,7 +10,7 @@
             <subant target="@{target}">
                 <fileset dir="domain" includes="build.xml"/>
                 <fileset dir="submitSMS" includes="build.xml"/>
-                <fileset dir="submitMMS" includes="*/build.xml"/>
+                <fileset dir="submitMMS" includes="build.xml"/>
             </subant>
         </sequential>
     </macrodef>

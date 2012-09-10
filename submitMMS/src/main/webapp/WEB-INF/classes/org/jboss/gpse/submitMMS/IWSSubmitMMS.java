@@ -1,5 +1,5 @@
 package org.jboss.gpse.submitMMS;
 
-public interface ISubmitMMS {
+public interface IWSSubmitMMS {
     void acceptMMS();
 }
