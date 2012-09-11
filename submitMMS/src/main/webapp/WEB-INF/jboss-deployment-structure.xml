@@ -3,6 +3,7 @@
         <dependencies>
             <module name="org.apache.camel.core" />
             <module name="org.apache.camel.netty" />
+            <module name="org.jboss.gpse" />
         </dependencies>
     </deployment>
 
