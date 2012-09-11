@@ -19,8 +19,8 @@ public class WSSubmitMMS implements IWSSubmitMMS {
     private Logger log = Logger.getLogger("WSSubmitMMS");
 
     @WebMethod
-    public void acceptMMS() {
-        log.info("acceptMMS() hello ");
+    public void proxyMMSRequest() {
+        log.info("proxyMMSRequest()");
         CamelContext context = new DefaultCamelContext();
         try {
             context.addRoutes(new RouteBuilder() {
