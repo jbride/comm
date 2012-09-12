@@ -10,5 +10,9 @@
 	<classpathentry kind="var" path="JBOSS_HOME/modules/org/apache/camel/core/main/camel-core-2.10.0.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/org/apache/log4j/main/log4j-1.2.16.jar"/>
 	<classpathentry kind="src" path="/domain"/>
+	<classpathentry kind="var" path="JBOSS_HOME/modules/org/switchyard/api/main/switchyard-api-0.6.0-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/modules/org/switchyard/component/bean/main/switchyard-component-bean-0.6.0-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/modules/javax/inject/api/main/javax.inject-1.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/modules/javax/ejb/api/main/jboss-ejb-api_3.1_spec-1.0.1.Final.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
