@@ -2,6 +2,8 @@ package org.jboss.gpse.submitSMS;
 
 import javax.inject.Inject;
 
+import org.jboss.gpse.SMS;
+import org.jboss.gpse.SMSResponse;
 import org.switchyard.component.bean.Reference;
 import org.switchyard.component.bean.Service;
 

@@ -7,6 +7,8 @@ import javax.jms.*;
 import javax.naming.InitialContext;
 import javax.naming.Context;
 
+import org.jboss.gpse.SMS;
+
 public class SimpleProducer {
 
     private static final String PROPERTIES_FILE_NAME = "/messaging.properties";

@@ -1,6 +1,7 @@
 package org.jboss.gpse.submitSMS;
 
 import org.apache.log4j.Logger;
+import org.jboss.gpse.SMS;
 import org.switchyard.component.bean.Service;
 
 @Service(IGreenService.class)

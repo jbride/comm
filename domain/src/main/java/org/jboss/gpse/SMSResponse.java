@@ -1,8 +1,6 @@
-package org.jboss.gpse.submitSMS;
+package org.jboss.gpse;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 

@@ -86,6 +86,7 @@
             <sca:interface.java interface="org.jboss.gpse.submitSMS.IDestinationService"/>
         </sca:service>
     </sca:component>
+
     <sca:component name="GreenService">
         <bean:implementation.bean class="org.jboss.gpse.submitSMS.GreenServiceBean"/>
         <sca:service name="IGreenService">

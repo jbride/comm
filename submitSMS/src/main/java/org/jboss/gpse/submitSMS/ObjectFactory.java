@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
+import org.jboss.gpse.SMS;
+import org.jboss.gpse.SMSResponse;
+
 @XmlRegistry
 public class ObjectFactory {
 
