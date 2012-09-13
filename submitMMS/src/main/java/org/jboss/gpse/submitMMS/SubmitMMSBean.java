@@ -20,9 +20,8 @@ public class SubmitMMSBean implements ISubmitMMS {
 
     public MMS acceptMMS(MMS mmsObj) {
         log.info("acceptMMS() mms = "+mmsObj);
-        //MMSResponse mmsResponse = new MMSResponse();
-        //mmsObj.setMmsResponse(mmsResponse);
-        mmsObj = new MMS();
+        MMSResponse mmsResponse = new MMSResponse();
+        mmsObj.setMmsResponse(mmsResponse);
         return mmsObj;
     }
 }

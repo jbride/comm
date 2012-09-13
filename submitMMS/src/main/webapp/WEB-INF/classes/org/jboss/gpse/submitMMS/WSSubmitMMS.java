@@ -19,22 +19,35 @@ import org.jboss.gpse.MMS;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class WSSubmitMMS implements IWSSubmitMMS {
 
+    public static final String DIRECT_VM_URL = "org.jboss.gpse.submitMMS.direct.vm.url";
     private static Logger log = Logger.getLogger("WSSubmitMMS");
+
+    private String directVMUrl = "direct-vm:submitMMSComponentFromDirectVM";
+
+    public WSSubmitMMS() {
+        if(System.getProperty(DIRECT_VM_URL) != null)
+            directVMUrl = System.getProperty(DIRECT_VM_URL);            
+    }
 
     @WebMethod
     public void proxyMMSRequest() {
-        log.info("proxyMMSRequest() start ....");
+        log.info("proxyMMSRequest() using directVMUrl =  "+directVMUrl);
         CamelContext camelContext = new DefaultCamelContext();
         MMS mmsObj = new MMS();
+        mmsObj.setCpid(1);
         
-        Endpoint endpoint = camelContext.getEndpoint("direct-vm:submitMMSComponentFromDirectVM");
+        //Endpoint endpoint = camelContext.getEndpoint("direct-vm:submitMMSComponentFromDirectVM");
+        Endpoint endpoint = camelContext.getEndpoint(directVMUrl);
         Producer producer = null;
         try {
             producer = endpoint.createProducer();
             producer.start();
-            Exchange exchangeToSend = producer.createExchange();
-            exchangeToSend.getOut().setBody(mmsObj);
-            producer.process(exchangeToSend);
+            Exchange exchange = producer.createExchange();
+            exchange.getOut().setBody(mmsObj);
+            producer.process(exchange);
+            MMS responseObj = (MMS)exchange.getOut().getBody();
+            log.info("proxyMMSReqest() responseObj = "+responseObj);
+            
         } catch(Exception x) {
             x.printStackTrace();
         } finally {
@@ -45,28 +58,5 @@ public class WSSubmitMMS implements IWSSubmitMMS {
             }
         }
         log.info("proxyMMSRequest() end .... ");
-/*
-        try {
-            context.addRoutes(new RouteBuilder() {
-                public void configure(){
-                    from("direct:start")
-                    .setBody()
-                    .to("direct-vm:submitMMSComponentFromDirectVM")
-                    .process(new Processor() {
-                    	public void process(Exchange exchange) throws Exception {
-                    		log.info("process exchange = "+exchange);
-                    	}
-                    });
-                }
-            });
-            
-            context.start();
-            Thread.sleep(1000);
-            context.stop();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-*/
     }
 }

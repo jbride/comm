@@ -1,0 +1,5 @@
+batch
+
+/system-property=org.jboss.gpse.submitMMS.direct.vm.url/:add(value=${org.jboss.gpse.submitMMS.direct.vm.url},boot-time=true)
+
+run-batch

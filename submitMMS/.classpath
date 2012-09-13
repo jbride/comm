@@ -14,5 +14,6 @@
 	<classpathentry kind="var" path="JBOSS_HOME/modules/org/switchyard/component/bean/main/switchyard-component-bean-0.6.0-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/javax/inject/api/main/javax.inject-1.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/javax/ejb/api/main/jboss-ejb-api_3.1_spec-1.0.1.Final.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/modules/javax/enterprise/api/main/cdi-api-1.0-SP4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
