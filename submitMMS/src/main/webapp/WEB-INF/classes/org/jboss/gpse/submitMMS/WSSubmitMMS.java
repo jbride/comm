@@ -53,7 +53,7 @@ public class WSSubmitMMS implements IWSSubmitMMS {
             Exchange exchange = producer.createExchange();
             exchange.getIn().setBody(mmsObj);
             producer.process(exchange);
-            MMS responseObj = (MMS)exchange.getOut().getBody();
+            MMS responseObj = (MMS)exchange.getIn().getBody();
             log.info("proxyMMSReqest() responseObj = "+responseObj);
             
         } catch(Exception x) {

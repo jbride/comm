@@ -42,8 +42,9 @@ public class DirectVMConsumer {
                     from("direct-vm:directVMTest")
                     .process(new Processor() {
                         public void process(Exchange exchange) throws Exception {
-                            log.info("process exchange = "+exchange);
                             MMS mmsObj = (MMS)exchange.getIn().getBody();
+                            log.info("process()  will increment the following obj by 1 : "+mmsObj);
+                            mmsObj.setCpid(mmsObj.getCpid() +1);
                             MMSResponse responseObj = new MMSResponse();
                             responseObj.setCpid(mmsObj.getCpid());
                             mmsObj.setMmsResponse(responseObj);

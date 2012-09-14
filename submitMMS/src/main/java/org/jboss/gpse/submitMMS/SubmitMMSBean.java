@@ -1,14 +1,8 @@
 package org.jboss.gpse.submitMMS;
 
-import javax.inject.Inject;
-
-import org.switchyard.component.bean.Reference;
 import org.switchyard.component.bean.Service;
 
 import org.apache.log4j.Logger;
-
-import org.jboss.gpse.MMS;
-import org.jboss.gpse.MMSResponse;
 
 import org.jboss.gpse.MMS;
 import org.jboss.gpse.MMSResponse;
@@ -19,9 +13,11 @@ public class SubmitMMSBean implements ISubmitMMS {
     private static Logger log = Logger.getLogger("SubmitMMSBean");
 
     public MMS acceptMMS(MMS mmsObj) {
-        log.info("acceptMMS() mms = "+mmsObj);
-        MMSResponse mmsResponse = new MMSResponse();
-        mmsObj.setMmsResponse(mmsResponse);
+        log.info("acceptMMS() will increment the following obj by 1 :  "+mmsObj);
+        mmsObj.setCpid(mmsObj.getCpid() +1);
+        MMSResponse responseObj = new MMSResponse();
+        responseObj.setCpid(mmsObj.getCpid());
+        mmsObj.setMmsResponse(responseObj);
         return mmsObj;
     }
 }
