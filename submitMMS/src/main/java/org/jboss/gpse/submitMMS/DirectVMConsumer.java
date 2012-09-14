@@ -43,7 +43,7 @@ public class DirectVMConsumer {
                     .process(new Processor() {
                         public void process(Exchange exchange) throws Exception {
                             log.info("process exchange = "+exchange);
-                            MMS mmsObj = (MMS)exchange.getOut().getBody();
+                            MMS mmsObj = (MMS)exchange.getIn().getBody();
                             MMSResponse responseObj = new MMSResponse();
                             responseObj.setCpid(mmsObj.getCpid());
                             mmsObj.setMmsResponse(responseObj);
