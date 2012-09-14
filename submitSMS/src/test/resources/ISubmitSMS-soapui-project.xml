@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="ISubmitSMS" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SubmitSMSBinding" type="wsdl" bindingName="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}SubmitSMSBinding" soapVersion="1_1" anonymous="optional" definition="http://zareason:8080/submitSMS/ISubmitSMS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://zareason:8080/submitSMS/ISubmitSMS?wsdl"><con:part><con:url>http://zareason:8080/submitSMS/ISubmitSMS?wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <types>
+    <xsd:schema targetNamespace="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="sms" type="tns:sms"/>
+      <xs:complexType name="sms">
+        <xs:sequence>
+          <xs:element name="cpid" type="xs:int"/>
+          <xs:element name="sender" type="xs:int"/>
+          <xs:element name="senderS" type="xs:string"/>
+          <xs:element name="text" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="smsResponse" type="tns:smsResponse"/>
+      <xs:complexType name="smsResponse">
+        <xs:sequence>
+          <xs:element name="cpid" type="xs:int"/>
+          <xs:element name="sender" type="xs:int"/>
+          <xs:element name="errorCode" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xsd:schema>
+  </types>
+  <message name="submitSMS">
+    <part element="tns:sms" name="parameters"></part>
+  </message>
+  <message name="submitSMSResponse">
+    <part element="tns:smsResponse" name="parameters"></part>
+  </message>
+  <portType name="SubmitSMSPortType">
+    <operation name="submitSMS">
+      <input message="tns:submitSMS"></input>
+      <output message="tns:submitSMSResponse"></output>
+    </operation>
+  </portType>
+  <binding name="SubmitSMSBinding" type="tns:SubmitSMSPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="submitSMS">
+      <soap:operation soapAction="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ISubmitSMS">
+    <port binding="tns:SubmitSMSBinding" name="SubmitSMSPort">
+      <soap:address location="http://zareason:8080/submitSMS/ISubmitSMS"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://zareason:8080/submitSMS/ISubmitSMS</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0" name="submitSMS" bindingOperationName="submitSMS" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://zareason:8080/submitSMS/ISubmitSMS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:sms>
+         <cpid>?</cpid>
+         <sender>?</sender>
+         <senderS>?</senderS>
+         <text>?</text>
+      </urn:sms>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

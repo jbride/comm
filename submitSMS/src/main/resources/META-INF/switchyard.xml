@@ -13,6 +13,16 @@
   <sca:composite name="submitSMS" targetNamespace="urn:org.jboss.gpse:submitSMS:0.0.1-SNAPSHOT">
 
 
+    <sca:service name="SubmitSMSviaSOAP" promote="submitSMSComponent/ISubmitSMS">
+        <sca:interface.wsdl interface="wsdl/submitSMS.wsdl#wsdl.porttype(SubmitSMSPortType)"/>
+        <soap:binding.soap>
+            <soap:wsdl>wsdl/submitSMS.wsdl</soap:wsdl>
+            <soap:wsdlPort>SubmitSMSPort</soap:wsdlPort>
+            <soap:socketAddr>:18001</soap:socketAddr>
+            <soap:contextPath>submitSMS</soap:contextPath>
+        </soap:binding.soap>
+    </sca:service>
+
     <sca:service name="SubmitSMSviaJMS" promote="submitSMSComponent/ISubmitSMS">
         <camel:binding.jms>
             <camel:operationSelector operationName="acceptSMS"/>
@@ -24,7 +34,7 @@
     <sca:component name="submitSMSComponent">
         <bean:implementation.bean class="org.jboss.gpse.submitSMS.SubmitSMSBean"/>
         <sca:service name="ISubmitSMS">
-            <sca:interface.java interface="org.jboss.gpse.submitSMS.ISubmitSMS"/>
+            <sca:interface.java interface="org.jboss.gpse.submitSMS.ISubmitSMS" />
         </sca:service>
         <sca:reference name="ISMSRequestValidation">
             <sca:interface.java interface="org.jboss.gpse.submitSMS.ISMSRequestValidation"/>
@@ -105,14 +115,6 @@
     
 
 
-    <!--sca:service name="SubmitSMSPortType" promote="SubmitSMS/SubmitSMS">
-        <sca:interface.wsdl interface="wsdl/submitSMS.wsdl#wsdl.porttype(SubmitSMSPortType)"/>
-        <soap:binding.soap>
-            <soap:wsdl>wsdl/submitSMS.wsdl</soap:wsdl>
-            <soap:socketAddr>:18001</soap:socketAddr>
-            <soap:contextPath>submitSMS</soap:contextPath>
-        </soap:binding.soap>
-    </sca:service -->
 
     <!--sca:service name="SubmitSMSviaFile" promote="SubmitSMS/SubmitSMS">
       <camel:binding.file>
