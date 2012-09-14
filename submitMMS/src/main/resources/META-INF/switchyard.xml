@@ -17,14 +17,6 @@
         <camel:binding.camel configURI="direct-vm:submitMMSComponentFromDirectVM">
             <camel:operationSelector operationName="acceptMMS"/>
         </camel:binding.camel>
-<!--
-        <camel:binding.netty-tcp>
-                <camel:host>localhost</camel:host>
-                <camel:port>3939</camel:port>
-                <camel:allowDefaultCodec>false</camel:allowDefaultCodec>
-                <camel:sync>false</camel:sync>
-        </camel:binding.netty-tcp> 
--->
     </sca:service>
 
     <sca:component name="submitMMSComponent">
