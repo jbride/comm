@@ -23,9 +23,13 @@ public class InvokeGWReference implements IInvokeGWReference {
     @Override
     public SMSResponse invokeGWReference(SMS smsObj) {
         log.info("acceptSMS() sms = "+smsObj);
+        smsObj = new SMS();
+        smsObj.setCpid(12345);
+        smsObj.setText("werwer");
         SMSResponse smsResponse = new SMSResponse();
         if(smsObj != null) {
             smsObj.setSmsResponse(smsResponse);
+            smsResponse = submitSMSReference.acceptSMS(smsObj);
         }
         return smsResponse;
     }

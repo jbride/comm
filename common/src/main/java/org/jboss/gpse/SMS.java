@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -32,10 +33,13 @@ public class SMS implements Serializable {
     @XmlElement(required = true)
     private String text;
 
-    @XmlElement(required = false)
+    @XmlTransient
     private List<String> recipients = new ArrayList<String>();
     
+    @XmlTransient
     private SMSResponse smsResponse = null;
+    
+    @XmlTransient
     private String destination;
 
     public String toString() {

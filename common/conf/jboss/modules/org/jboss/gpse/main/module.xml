@@ -3,5 +3,10 @@
    <resources>
       <resource-root path="${project.name}-common.jar"/>
    </resources>
+
+    <dependencies>
+        <module name="javax.api" export="true" />
+        <module name="javax.xml.bind.api" export="true" />
+    </dependencies>
 </module>
 

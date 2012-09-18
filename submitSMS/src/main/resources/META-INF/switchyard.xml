@@ -5,8 +5,8 @@
     xmlns:camel="urn:switchyard-component-camel:config:1.0"
     xmlns:rules="urn:switchyard-component-rules:config:1.0" 
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" 
-    xmlns:transform="urn:switchyard-config:transform:1.0"
     xmlns:soap="urn:switchyard-component-soap:config:1.0"
+    xmlns:transform="urn:switchyard-config:transform:1.0"
     name="submitSMS" 
     targetNamespace="urn:org.jboss.gpse:submitSMS:0.0.1-SNAPSHOT">
 
