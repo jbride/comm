@@ -33,11 +33,6 @@
             <param name="dest.dir" value="${build.dir}" />
         </antcall>
 
-        <!--path id="test.classpath" >
-            <path refid="classpath" />
-            <pathelement location="${build.dir}" />
-        </path -->
-
         <java fork="yes" classname="org.jboss.gpse.submitSMS.SimpleProducer" failonerror="true">
             <jvmarg value="-Xms16m" />
             <jvmarg value="-Xmx64m" />
@@ -53,6 +48,8 @@
             <jvmarg value="-Xms16m" />
             <jvmarg value="-Xmx64m" />
             <jvmarg value="-Dorg.jboss.gpse.submitSMS.wsdl.url=${org.jboss.gpse.submitSMS.wsdl.url}"/>
+            <jvmarg value="-Dorg.jboss.gpse.submitSMS.text=${org.jboss.gpse.submitSMS.text}"/>
+            <jvmarg value="-Dorg.jboss.gpse.submitSMS.cpid=${org.jboss.gpse.submitSMS.cpid}"/>
             <sysproperty key="log4j.configuration" value="file:${development.base}/conf/test/log4j.xml" />
             <classpath refid="classpath"/>
         </java>

@@ -16,17 +16,25 @@ import org.jboss.gpse.submitSMS.jaxb.*;
 public class JaxWSClient {
     
     private static final String WSDL_URL = "org.jboss.gpse.submitSMS.wsdl.url";
+    private static final String TEXT = "org.jboss.gpse.submitSMS.text";
+    private static final String CPID = "org.jboss.gpse.submitSMS.cpid";
+
     private static Logger log = Logger.getLogger(JaxWSClient.class);
-    private static String wsdlUrl = "http://zareason:8080/submitSMS/ISubmitSMS?wsdl";
     private static String namespaceURI = "urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0";
     private static String serviceName = "ISubmitSMS";
-    private static int loops = 1;
 
     public static void main(String[] args){
-        String wsdlUrlProp = System.getProperty(WSDL_URL);
-        if(wsdlUrlProp != null)
-            wsdlUrl = wsdlUrlProp;
-        log.info("main() wsdlUrl = "+wsdlUrl);
+        String wsdlUrl = System.getProperty(WSDL_URL);
+        String text = System.getProperty(TEXT);
+        String cpid = System.getProperty(CPID);
+        StringBuilder sBuilder = new StringBuilder();
+        sBuilder.append("\n\twsdlUrl = ");
+        sBuilder.append(wsdlUrl);
+        sBuilder.append("\n\ttext = ");
+        sBuilder.append(text);
+        sBuilder.append("\n\tcpid = ");
+        sBuilder.append(cpid);
+        log.info("main() properties = "+sBuilder.toString());
 
 	try {
             QName qname = new QName(namespaceURI, serviceName);
@@ -37,12 +45,12 @@ public class JaxWSClient {
             ((BindingProvider)wsPort).getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, "admin");
 
             Sms smsObj = new Sms();
-            smsObj.setCpid(1);
+            smsObj.setCpid(Integer.parseInt(cpid));
+            smsObj.setText(text);
             SmsResponse response = wsPort.acceptSMS(smsObj);
-            log.info("main() response = "+response);
+            log.info("main() response errorCode = "+response.getErrorCode());
 	} catch (Exception x) {
 		x.printStackTrace();
 	}
     }
-
 }
