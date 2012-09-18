@@ -1,0 +1,24 @@
+<project name="gwReferences" default="all" >
+    <property environment="ENV"/>
+    <property file="../build.properties" />
+    <path id="classpath" >
+        <path refid="initial.classpath" />
+        <pathelement location="../submitSMS/${build.dir}" />
+    </path>
+    <import file="${development.base}/base-build.xml"/>
+
+    <target name="all" >
+        <antcall target="clean" />
+        <antcall target="jar" >
+            <param name="jar.name" value="${vendor.name}-${ant.project.name}" />
+        </antcall>
+        <antcall target="cli.command" >
+            <param name="cli.command" value="deploy ${build.dir}/${vendor.name}-${ant.project.name}.jar --force "/>
+        </antcall>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+    </target>
+
+</project>

@@ -1,4 +1,4 @@
-<project name="domain" default="all" basedir="." >
+<project name="common" default="all" basedir="." >
 
     <property environment="ENV"/>
     <property file="../build.properties" />
@@ -12,9 +12,9 @@
         <antcall target="clean" />
         <antcall target="configure.jboss.modules" />
         <antcall target="jar" >
-            <param name="jar.name" value="${project.name}-domain" />
+            <param name="jar.name" value="${project.name}-common" />
         </antcall>
-        <copy file="${build.dir}/${project.name}-domain.jar"  todir="${jboss.home}/modules/org/jboss/gpse/main" overwrite="true" />
+        <copy file="${build.dir}/${project.name}-common.jar"  todir="${jboss.home}/modules/org/jboss/gpse/main" overwrite="true" />
     </target>
 
     <target name="configure.jboss.modules" >
