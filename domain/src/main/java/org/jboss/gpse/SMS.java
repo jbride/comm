@@ -6,7 +6,18 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "sms", propOrder = {
+    "cpid",
+    "sender",
+    "senderS",
+    "text"
+})
 @XmlRootElement(name = "sms")
 public class SMS implements Serializable {
     @XmlElement(required = true)
@@ -19,11 +30,11 @@ public class SMS implements Serializable {
     private String senderS;
     
     @XmlElement(required = true)
-    private List<String> recipients = new ArrayList<String>();
-    
-    @XmlElement(required = true)
     private String text;
 
+    @XmlElement(required = false)
+    private List<String> recipients = new ArrayList<String>();
+    
     private SMSResponse smsResponse = null;
     private String destination;
 

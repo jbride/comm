@@ -1,8 +1,7 @@
 package org.jboss.gpse.submitMMS;
 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
@@ -15,22 +14,25 @@ import org.apache.log4j.Logger;
 
 import org.jboss.gpse.MMS;
 
-@WebService
-@SOAPBinding(style = SOAPBinding.Style.RPC)
-public class WSSubmitMMS implements IWSSubmitMMS {
+@Path("/")
+public class RSSubmitMMS implements IWSSubmitMMS {
 
     public static final String DIRECT_VM_URL = "org.jboss.gpse.submitMMS.direct.vm.url";
-    private static Logger log = Logger.getLogger("WSSubmitMMS");
+    private static Logger log = Logger.getLogger("RSSubmitMMS");
 
     private String directVMUrl = "direct-vm:submitMMSComponentFromDirectVM";
 
-    public WSSubmitMMS() {
+    public RSSubmitMMS() {
         if(System.getProperty(DIRECT_VM_URL) != null)
             directVMUrl = System.getProperty(DIRECT_VM_URL);            
     }
 
     
-    @WebMethod
+    /*
+     * example:    curl $HOSTNAME:8080/submitMMS/proxyMMSRequest
+     */
+    @GET
+    @Path("/proxyMMSRequest")
     public void proxyMMSRequest() {
         log.info("proxyMMSRequest() using directVMUrl =  "+directVMUrl);
         CamelContext camelContext = new DefaultCamelContext();

@@ -13,12 +13,12 @@
   <sca:composite name="submitSMS" targetNamespace="urn:org.jboss.gpse:submitSMS:0.0.1-SNAPSHOT">
 
 
-    <sca:service name="SubmitSMSviaSOAP" promote="submitSMSComponent/ISubmitSMS">
+    <sca:service name="ISubmitSMS" promote="submitSMSComponent/ISubmitSMS">
+    <!--sca:service name="SubmitSMSviaSOAP" promote="submitSMSComponent/ISubmitSMS" -->
         <sca:interface.wsdl interface="wsdl/submitSMS.wsdl#wsdl.porttype(SubmitSMSPortType)"/>
         <soap:binding.soap>
             <soap:wsdl>wsdl/submitSMS.wsdl</soap:wsdl>
             <soap:wsdlPort>SubmitSMSPort</soap:wsdlPort>
-            <soap:socketAddr>:18001</soap:socketAddr>
             <soap:contextPath>submitSMS</soap:contextPath>
         </soap:binding.soap>
     </sca:service>
@@ -110,52 +110,19 @@
         </sca:service>
     </sca:component>
 
-
-
-    
-
-
-
-    <!--sca:service name="SubmitSMSviaFile" promote="SubmitSMS/SubmitSMS">
-      <camel:binding.file>
-        <contextMapper/>
-        <camel:operationSelector operationName="health"/>
-        <camel:directory>/tmp</camel:directory>
-        <camel:autoCreate>true</camel:autoCreate>
-        <camel:fileName>test.txt</camel:fileName>
-        <camel:consume>
-          <camel:preMove>.working</camel:preMove>
-          <camel:moveFailed>.failed</camel:moveFailed>
-        </camel:consume>
-      </camel:binding.file>
-    </sca:service -->
-
-    <!--sca:service name="SubmitSMSviaFile2" promote="SubmitSMS/SubmitSMS">
-      <camel:binding.file>
-        <contextMapper/>
-        <camel:operationSelector operationName="health"/>
-        <camel:directory>/tmp</camel:directory>
-        <camel:autoCreate>true</camel:autoCreate>
-        <camel:fileName>test2.txt</camel:fileName>
-        <camel:consume>
-          <camel:preMove>.working</camel:preMove>
-          <camel:moveFailed>.failed</camel:moveFailed>
-        </camel:consume> 
-      </camel:binding.file>
-    </sca:service -->
-
   </sca:composite>
 
   <transforms >
     <transform:transform.jaxb 
-        from="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}SMSReq" 
-        to="java:org.jboss.gpse.submitSMS.SMS"
+        from="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}sms" 
+        to="java:org.jboss.gpse.SMS"
         contextPath="org.jboss.gpse.submitSMS"
     />
     <transform:transform.jaxb 
-        from="java:org.jboss.gpse.submitSMS.SMSResponse" 
-        to="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}SMSResponse" 
-        contextPath="org.jboss.gpse.submitSMS"/>
+        from="java:org.jboss.gpse.SMSResponse"
+        to="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}smsResponse" 
+        contextPath="org.jboss.gpse.submitSMS"
+    />
   </transforms>
 
 </switchyard>

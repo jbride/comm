@@ -27,7 +27,6 @@
         <antcall target="cli.command" >
             <param name="cli.command" value="deploy ${build.dir}/${vendor.name}-${ant.project.name}-war.war --force "/>
         </antcall>
-
     </target>
 
     <target name="clean">

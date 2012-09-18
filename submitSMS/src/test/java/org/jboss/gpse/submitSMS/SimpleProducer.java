@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.Context;
 
 import org.jboss.gpse.SMS;
+import org.jboss.gpse.SMSResponse;
 
 public class SimpleProducer {
 
@@ -41,7 +42,6 @@ public class SimpleProducer {
             jmsProviderContext = new InitialContext(properties);
 
 
-            //final ConnectionFactory connectionFactory = (ConnectionFactory) jmsProviderContext.lookup(CONNECTION_FACTORY_NAME); //QPID specific
             final ConnectionFactory connectionFactory = (ConnectionFactory) jmsProviderContext.lookup((String)properties.get(CONNECTION_FACTORY_NAME));
             connObj = connectionFactory.createConnection();
             connObj.setExceptionListener(new ExceptionListener() {

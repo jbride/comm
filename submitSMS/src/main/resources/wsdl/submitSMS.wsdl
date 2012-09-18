@@ -39,7 +39,7 @@
   </message>
   
   <portType name="SubmitSMSPortType">
-    <operation name="submitSMS">
+    <operation name="acceptSMS">
       <input message="tns:submitSMS"/>
       <output message="tns:submitSMSResponse"/>
     </operation>
@@ -47,7 +47,7 @@
   
   <binding name="SubmitSMSBinding" type="tns:SubmitSMSPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-    <operation name="submitSMS">
+    <operation name="acceptSMS">
       <soap:operation soapAction="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0"/>
       <input>
         <soap:body use="literal"/>

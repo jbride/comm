@@ -1,10 +1,11 @@
 package org.jboss.gpse.submitSMS;
 
 import org.jboss.gpse.SMS;
+import org.jboss.gpse.SMSResponse;
 
 public interface ISubmitSMS {
 
-    SMS acceptSMS(SMS smsObj);
+    SMSResponse acceptSMS(SMS smsObj);
     void health(String payload);
 
 }
