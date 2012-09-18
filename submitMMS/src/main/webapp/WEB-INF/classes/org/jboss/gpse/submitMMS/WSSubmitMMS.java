@@ -17,7 +17,7 @@ import org.jboss.gpse.MMS;
 
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
-public class WSSubmitMMS implements IWSSubmitMMS {
+public class WSSubmitMMS implements IJaxSubmitMMS {
 
     public static final String DIRECT_VM_URL = "org.jboss.gpse.submitMMS.direct.vm.url";
     private static Logger log = Logger.getLogger("WSSubmitMMS");
@@ -27,12 +27,12 @@ public class WSSubmitMMS implements IWSSubmitMMS {
     public WSSubmitMMS() {
         if(System.getProperty(DIRECT_VM_URL) != null)
             directVMUrl = System.getProperty(DIRECT_VM_URL);            
+        log.info("WSSubmitMMS() using directVMUrl =  "+directVMUrl);
     }
 
     
     @WebMethod
-    public void proxyMMSRequest() {
-        log.info("proxyMMSRequest() using directVMUrl =  "+directVMUrl);
+    public void proxyMMSRequest(int cpid) {
         CamelContext camelContext = new DefaultCamelContext();
         MMS mmsObj = new MMS();
         mmsObj.setCpid(1);

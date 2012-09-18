@@ -22,3 +22,6 @@ details
             a)  a JAX-RS service
             b)  a JAX-WS service
 
+    3)  gwReferences
+        - demonstrates examples of invoking the following remote gateway references :
+
