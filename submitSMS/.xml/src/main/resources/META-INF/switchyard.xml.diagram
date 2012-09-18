@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="org.switchyard.tools.ui.editor.diagram" name="switchyard.xml" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.0/@children.0/@link //@children.0/@children.0/@children.0/@anchors.0/@link //@children.0/@children.0/@children.1/@link //@children.0/@children.0/@children.1/@anchors.0/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.0/@children.2/@anchors.0/@link //@children.0/@children.1/@link //@children.0/@children.1/@children.0/@link //@children.0/@children.1/@children.0/@anchors.0/@link //@connections.0/@link //@children.0/@children.1/@children.1/@link //@children.0/@children.1/@children.1/@anchors.0/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.1/@children.2/@anchors.0/@link //@children.0/@children.1/@children.3/@link //@children.0/@children.1/@children.3/@anchors.0/@link //@children.0/@children.2/@link //@children.0/@children.2/@children.0/@link //@children.0/@children.2/@children.0/@anchors.0/@link //@connections.1/@link //@children.0/@children.3/@link //@children.0/@children.3/@children.0/@link //@children.0/@children.3/@children.0/@anchors.0/@link //@connections.2/@link //@children.0/@children.4/@link //@children.0/@children.4/@children.0/@link //@children.0/@children.4/@children.0/@anchors.0/@link //@connections.3/@link //@children.0/@children.5/@link //@children.0/@children.5/@children.0/@link //@children.0/@children.5/@children.0/@anchors.0/@link //@connections.4/@link //@children.0/@children.6/@link //@children.0/@children.6/@anchors.0/@link" version="0.9.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="org.switchyard.tools.ui.editor.diagram" name="switchyard.xml" snapToGrid="true" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.0/@children.0/@link //@children.0/@children.0/@children.0/@anchors.0/@link //@children.0/@children.0/@children.1/@link //@children.0/@children.0/@children.1/@anchors.0/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.0/@children.2/@anchors.0/@link //@children.0/@children.1/@link //@children.0/@children.1/@children.0/@link //@children.0/@children.1/@children.0/@anchors.0/@link //@connections.0/@link //@children.0/@children.1/@children.1/@link //@children.0/@children.1/@children.1/@anchors.0/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.1/@children.2/@anchors.0/@link //@children.0/@children.1/@children.3/@link //@children.0/@children.1/@children.3/@anchors.0/@link //@children.0/@children.2/@link //@children.0/@children.2/@children.0/@link //@children.0/@children.2/@children.0/@anchors.0/@link //@connections.1/@link //@children.0/@children.3/@link //@children.0/@children.3/@children.0/@link //@children.0/@children.3/@children.0/@anchors.0/@link //@connections.2/@link //@children.0/@children.4/@link //@children.0/@children.4/@children.0/@link //@children.0/@children.4/@children.0/@anchors.0/@link //@connections.3/@link //@children.0/@children.5/@link //@children.0/@children.5/@children.0/@link //@children.0/@children.5/@children.0/@anchors.0/@link //@connections.4/@link //@children.0/@children.6/@link //@children.0/@children.6/@anchors.0/@link //@children.0/@children.7/@link //@children.0/@children.7/@anchors.0/@link" version="0.9.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
     <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#/"/>
@@ -16,10 +16,10 @@
       <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#//@switchyard/@composite"/>
     </link>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="123" height="60" x="140" y="160">
-        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="1" transparency="0.0" width="110" height="60" x="5" style="//@styles.1" cornerWidth="6">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="171" height="61" x="140" y="160">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="1" transparency="0.0" width="158" height="61" x="5" style="//@styles.1" cornerWidth="6">
           <properties key="sca-type" value="component"/>
-          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="108" height="30" x="5" y="15" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="submitSMSComponent"/>
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="156" height="30" x="5" y="15" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="submitSMSComponent"/>
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
@@ -30,14 +30,14 @@
         <link>
           <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#ComponentService:submitSMSComponent:ISubmitSMS"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.5">
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.5 //@connections.6">
           <link>
             <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#ComponentService:submitSMSComponent:ISubmitSMS"/>
           </link>
         </anchors>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
-        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="107" y="10" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
+        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="155" y="10" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
         <link>
           <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#ComponentReference:submitSMSComponent:ISMSRequestValidation"/>
         </link>
@@ -48,7 +48,7 @@
         </anchors>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
-        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="107" y="30" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
+        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="155" y="30" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
         <link>
           <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#ComponentReference:submitSMSComponent:IRoutingService"/>
         </link>
@@ -60,10 +60,10 @@
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="188" height="80" x="270" y="240">
-        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="1" transparency="0.0" width="175" height="80" x="5" style="//@styles.1" cornerWidth="6">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="148" height="81" x="310" y="240">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="1" transparency="0.0" width="135" height="81" x="5" style="//@styles.1" cornerWidth="6">
           <properties key="sca-type" value="component"/>
-          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="173" height="40" x="5" y="20" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="routingService"/>
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="133" height="40" x="5" y="20" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="routingService"/>
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
@@ -81,7 +81,7 @@
         </anchors>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
-        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="172" y="10" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
+        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="132" y="10" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
         <link>
           <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#ComponentReference:routingService:IDestinationService"/>
         </link>
@@ -92,7 +92,7 @@
         </anchors>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
-        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="172" y="30" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
+        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="132" y="30" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
         <link>
           <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#ComponentReference:routingService:IRedService"/>
         </link>
@@ -103,7 +103,7 @@
         </anchors>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
-        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="172" y="50" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
+        <graphicsAlgorithm xsi:type="al:Image" lineWidth="1" transparency="0.0" width="16" height="16" x="132" y="50" id="org.switchyard.tools.ui.editor.componentreference.16" stretchH="false" stretchV="false" proportional="false"/>
         <link>
           <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#ComponentReference:routingService:IGreenService"/>
         </link>
@@ -159,10 +159,10 @@
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="196" height="60" x="262" y="30">
-        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="1" transparency="0.0" width="183" height="60" x="5" style="//@styles.1" cornerWidth="6">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="159" height="61" x="310" y="30">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="1" transparency="0.0" width="146" height="61" x="5" style="//@styles.1" cornerWidth="6">
           <properties key="sca-type" value="component"/>
-          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="181" height="30" x="5" y="15" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="smsRequestValidation"/>
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="144" height="30" x="5" y="15" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="smsRequestValidation"/>
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
@@ -206,7 +206,7 @@
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="100" height="50" y="50">
         <graphicsAlgorithmChildren xsi:type="al:Polygon" lineWidth="1" filled="true" transparency="0.0" width="100" height="50" style="//@styles.2">
           <properties key="sca-type" value="service"/>
-          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="85" height="25" x="5" y="12" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="SubmitSMSviaJMS"/>
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="85" height="25" x="5" y="12" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="ISubmitSMS"/>
           <points/>
           <points x="75"/>
           <points x="100" y="25"/>
@@ -222,6 +222,29 @@
       <anchors xsi:type="pi:ChopboxAnchor" active="true" outgoingConnections="//@connections.5">
         <link>
           <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#//@switchyard/@composite/@service.0"/>
+        </link>
+      </anchors>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="100" height="50" y="240">
+        <graphicsAlgorithmChildren xsi:type="al:Polygon" lineWidth="1" filled="true" transparency="0.0" width="100" height="50" style="//@styles.2">
+          <properties key="sca-type" value="service"/>
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.3" lineWidth="1" filled="false" transparency="0.0" width="85" height="25" x="5" y="12" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" value="SubmitSMSviaJMS"/>
+          <points/>
+          <points x="75"/>
+          <points x="100" y="25"/>
+          <points x="75" y="50"/>
+          <points y="50"/>
+          <points x="15" y="25"/>
+          <points/>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#//@switchyard/@composite/@service.1"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" active="true" outgoingConnections="//@connections.6">
+        <link>
+          <businessObjects href="../../../../../src/main/resources/META-INF/switchyard.xml#//@switchyard/@composite/@service.1"/>
         </link>
       </anchors>
     </children>
@@ -380,6 +403,12 @@
     </connectionDecorators>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.0/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.3" lineWidth="2" lineStyle="DOT" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="16" height="16"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.7/@anchors.0" end="//@children.0/@children.0/@children.0/@anchors.0">
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.3" lineWidth="2" lineStyle="DOT" filled="false" transparency="0.0"/>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="16" height="16"/>

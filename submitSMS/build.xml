@@ -24,6 +24,7 @@
 
     <target name="clean">
         <delete dir="${build.dir}" />
+        <delete file="transaction.log" />
     </target>
 
     <target name="send.SMS.via.jms" description="">
