@@ -18,7 +18,7 @@ public class InvokeGWReference implements IInvokeGWReference {
 
     @Inject
     @Reference
-    private ISubmitSMS submitSMSReference;
+    private ISubmitSMSReference submitSMSReference;
     
     @Override
     public SMSResponse invokeGWReference(SMS smsObj) {

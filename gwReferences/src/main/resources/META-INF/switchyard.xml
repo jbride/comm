@@ -25,21 +25,20 @@
       <sca:service name="IInvokeGWReference">
         <sca:interface.java interface="org.jboss.gpse.gwReferences.IInvokeGWReference"/>
       </sca:service>
-      <sca:reference name="ISubmitSMS">
-        <sca:interface.wsdl interface="http://${ENV.HOSTNAME}:8080/submitSMS/ISubmitSMS?wsdl#wsdl.porttype(SubmitSMSPortType)"/>
+      <sca:reference name="ISubmitSMSReference">
+        <interface.java interface="org.jboss.gpse.gwReferences.ISubmitSMSReference"/>
       </sca:reference>
     </sca:component>
 
-    <sca:reference name="ISubmitSMS" multiplicity="0..1" promote="InvokeGWReference/SOAPGWReference">
-      <soap:binding.soap>
-        <soap:contextMapper/>
-        <soap:wsdl>http://${ENV.HOSTNAME}:8080/submitSMS/ISubmitSMS?wsdl</soap:wsdl>
-      </soap:binding.soap>
+    <sca:reference name="ISubmitSMSReference" multiplicity="1..1" promote="InvokeGWReference/ISubmitSMSReference">
+      <camel:binding.camel configURI="cxf:bean:http://${ENV.HOSTNAME}:8080/submitSMS/ISubmitSMS"/>
     </sca:reference>
 
   </sca:composite>
 
     <transforms >
+        <transform.java xmlns="urn:switchyard-config:transform:1.0" class="org.jboss.gpse.gwReferences.Transformers" from="java:org.jboss.gpse.SMS" to="{urn:org.jboss.gpse.gwReferences:bean-service:1.0}domSMS"/>
+        <transform.java xmlns="urn:switchyard-config:transform:1.0" class="org.jboss.gpse.gwReferences.Transformers" from="{urn:org.jboss.gpse.gwReferences:bean-service:1.0}domSMSResponse" to="java:org.jboss.gpse.SMSResponse"/>
         <transform:transform.jaxb 
             from="java:org.jboss.gpse.SMS"
             to="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}sms" 

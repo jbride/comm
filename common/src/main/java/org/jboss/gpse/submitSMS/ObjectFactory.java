@@ -8,6 +8,10 @@ import javax.xml.namespace.QName;
 import org.jboss.gpse.SMS;
 import org.jboss.gpse.SMSResponse;
 
+
+/*
+ * why does this class work when all functions are returning null ??????
+ */
 @XmlRegistry
 public class ObjectFactory {
 
@@ -17,19 +21,23 @@ public class ObjectFactory {
     public ObjectFactory() {}
 
     public SMS createSMS() {
-        return new SMS();
+    	SMS smsObj = new SMS();
+        return null;
     }
     public SMSResponse createSMSResponse() {
-        return new SMSResponse();
+    	SMSResponse smsResponse = new SMSResponse();
+        return null;
     }
 
     @XmlElementDecl(namespace = "urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0", name = "sms")
     public JAXBElement<SMS> createSMS(SMS value) {
-        return new JAXBElement<SMS>(_SMS_QNAME, SMS.class, null, value);
+        JAXBElement jElement = new JAXBElement<SMS>(_SMS_QNAME, SMS.class, null, value);
+        return null;
     }
 
     @XmlElementDecl(namespace = "urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0", name = "smsResponse")
     public JAXBElement<SMSResponse> createSMSResponse(SMSResponse value) {
-        return new JAXBElement<SMSResponse>(_SMS_RESPONSE_QNAME, SMSResponse.class, null, value);
+        JAXBElement jElement = new JAXBElement<SMSResponse>(_SMS_RESPONSE_QNAME, SMSResponse.class, null, value);
+        return null;
     }
 }
