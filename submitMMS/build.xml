@@ -14,18 +14,18 @@
             <param name="cli.fail.on.error" value="false"/>
         </antcall>
         <antcall target="jar" >
-            <param name="jar.name" value="${vendor.name}-${ant.project.name}" />
+            <param name="jar.name" value="${organization.name}-${ant.project.name}" />
         </antcall>
         <antcall target="cli.command" >
-            <param name="cli.command" value="deploy ${build.dir}/${vendor.name}-${ant.project.name}.jar --force "/>
+            <param name="cli.command" value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force "/>
         </antcall>
 
         <antcall target="clean" />
         <antcall target="war" >
-            <param name="war.name" value="${vendor.name}-${ant.project.name}-war" />
+            <param name="war.name" value="${organization.name}-${ant.project.name}-war" />
         </antcall>
         <antcall target="cli.command" >
-            <param name="cli.command" value="deploy ${build.dir}/${vendor.name}-${ant.project.name}-war.war --force "/>
+            <param name="cli.command" value="deploy ${build.dir}/${organization.name}-${ant.project.name}-war.war --force "/>
         </antcall>
     </target>
 

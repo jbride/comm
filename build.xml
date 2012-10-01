@@ -12,6 +12,7 @@
                 <fileset dir="submitSMS" includes="build.xml"/>
                 <fileset dir="submitMMS" includes="build.xml"/>
                 <fileset dir="gwReferences" includes="build.xml"/>
+                <fileset dir="billingMistake" includes="build.xml"/>
             </subant>
         </sequential>
     </macrodef>

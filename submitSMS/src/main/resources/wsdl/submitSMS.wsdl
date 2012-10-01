@@ -60,7 +60,7 @@
   
   <service name="ISubmitSMS">
     <port name="SubmitSMSPort" binding="tns:SubmitSMSBinding">
-      <soap:address location="http://${ENV.HOSTNAME}:18001/${vendor.name}"/>
+      <soap:address location="http://${ENV.HOSTNAME}:18001/${organization.name}"/>
     </port>
   </service>
 
