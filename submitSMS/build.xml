@@ -17,9 +17,11 @@
         <antcall target="jar" >
             <param name="jar.name" value="${organization.name}-${ant.project.name}" />
         </antcall>
-        <antcall target="cli.command" >
-            <param name="cli.command" value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force "/>
-        </antcall>
+         <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
+            <arg value="--connect"/>
+            <arg value="--controller=${ENV.HOSTNAME}:${pfp.core.management.port}"/>
+            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force"/>
+        </exec>
     </target>
 
     <target name="clean">
