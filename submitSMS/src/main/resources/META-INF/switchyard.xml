@@ -114,19 +114,23 @@
 
   <transforms >
 
-    <!-- contextPath is required.  otherwise following exception will result:
+    <!-- 
+        - contextPath is required.  otherwise following exception will result:
             javax.xml.bind.UnmarshalException: unexpected element (uri:"urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0", local:"sms"). Expected elements are <{}sms>
-        value of contextPath appears to correspond to the package of the ObjectFactory of your JAXB annotated domain classes
+
+        - value of contextPath needs to correspond to package of the ObjectFactory of your JAXB annotated domain classes.
+            otherwise, the following exception will result:
+                javax.xml.bind.JAXBException: "org.jboss.gpse" doesnt contain ObjectFactory.class or jaxb.index
     -->
     <transform:transform.jaxb 
         from="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}sms" 
         to="java:org.jboss.gpse.SMS"
-        contextPath="org.jboss.gpse.submitSMS"
+        contextPath="org.jboss.gpse"
     />
     <transform:transform.jaxb 
         from="java:org.jboss.gpse.SMSResponse"
         to="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}smsResponse" 
-        contextPath="org.jboss.gpse.submitSMS"
+        contextPath="org.jboss.gpse"
     />
   </transforms>
 

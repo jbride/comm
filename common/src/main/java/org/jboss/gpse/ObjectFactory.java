@@ -1,4 +1,4 @@
-package org.jboss.gpse.submitSMS;
+package org.jboss.gpse;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -16,6 +16,8 @@ import org.jboss.gpse.SMSResponse;
  *  Caused by: javax.xml.bind.JAXBException: "org.jboss.gpse.submitSMS" doesnt contain ObjectFactory.class or jaxb.index
  *
  * this class does not appear to be invoked however as evidenced by having all of its functions return null
+ *
+ * TO-DO: include MMS and MMSResponse factories
  */
 @XmlRegistry
 public class ObjectFactory {

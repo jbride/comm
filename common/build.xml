@@ -6,6 +6,7 @@
         <path refid="initial.classpath" />
     </path>
     <import file="${development.base}/base-build.xml"/>
+    <import file="${development.base}/build.xml"/>
 
 
     <target name="all">
@@ -15,6 +16,7 @@
             <param name="jar.name" value="${project.name}-common" />
         </antcall>
         <copy file="${build.dir}/${project.name}-common.jar"  todir="${jboss.home}/modules/org/jboss/gpse/main" overwrite="true" />
+        <antcall target="bounce.pfp.core" />
     </target>
 
     <target name="configure.jboss.modules" >
