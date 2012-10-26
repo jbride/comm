@@ -113,6 +113,11 @@
   </sca:composite>
 
   <transforms >
+
+    <!-- contextPath is required.  otherwise following exception will result:
+            javax.xml.bind.UnmarshalException: unexpected element (uri:"urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0", local:"sms"). Expected elements are <{}sms>
+        value of contextPath appears to correspond to the package of the ObjectFactory of your JAXB annotated domain classes
+    -->
     <transform:transform.jaxb 
         from="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}sms" 
         to="java:org.jboss.gpse.SMS"

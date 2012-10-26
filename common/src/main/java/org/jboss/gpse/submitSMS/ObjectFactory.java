@@ -10,7 +10,12 @@ import org.jboss.gpse.SMSResponse;
 
 
 /*
- * why does this class work when all functions are returning null ??????
+ * jaxb classes should have this factory class in the same package as the classes
+ * xjc will auto-generate this class
+ * if not present, then the following exception is thrown:
+ *  Caused by: javax.xml.bind.JAXBException: "org.jboss.gpse.submitSMS" doesnt contain ObjectFactory.class or jaxb.index
+ *
+ * this class does not appear to be invoked however as evidenced by having all of its functions return null
  */
 @XmlRegistry
 public class ObjectFactory {
