@@ -1,10 +1,11 @@
 <project name="submitMMS" default="all" >
     <property environment="ENV"/>
-    <property file="../build.properties" />
+    <property file="../base.properties" />
     <path id="classpath" >
         <path refid="initial.classpath" />
     </path>
     <import file="${development.base}/base-build.xml"/>
+    <property file="../build.properties" />
 
     <target name="all" >
         <antcall target="clean" />

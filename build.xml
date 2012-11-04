@@ -1,14 +1,16 @@
 <project name="comm" default="all" >
     <property environment="ENV"/>
 
-    <property file="build.properties" />
+    <property file="base.properties" />
     <import file="${development.base}/base-build.xml"/>
+    <property file="build.properties" />
 
     <macrodef name="iterate">
         <attribute name="target"/>
         <sequential>
             <subant target="@{target}">
                 <fileset dir="common" includes="build.xml"/>
+                <fileset dir="simpleJaxWs" includes="build.xml"/>
                 <fileset dir="submitSMS" includes="build.xml"/>
                 <fileset dir="submitMMS" includes="build.xml"/>
                 <fileset dir="gwReferences" includes="build.xml"/>

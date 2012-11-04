@@ -1,21 +1,48 @@
 <project name="gwReferences" default="all" >
     <property environment="ENV"/>
-    <property file="../build.properties" />
+    <property file="../base.properties" />
     <path id="classpath" >
         <path refid="initial.classpath" />
-        <pathelement location="../submitSMS/${build.dir}" />
     </path>
     <import file="${development.base}/base-build.xml"/>
+    <property file="../build.properties" />
 
     <target name="all" >
         <antcall target="clean" />
         <antcall target="jar" >
             <param name="jar.name" value="${organization.name}-${ant.project.name}" />
         </antcall>
-        <antcall target="cli.command" >
-            <param name="cli.command" value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force "/>
-        </antcall>
+         <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
+            <arg value="--connect"/>
+            <arg value="--controller=${os.hostname}:${pfp.core.management.port}"/>
+            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force"/>
+        </exec>
+
     </target>
+
+    <target name="send.SMS.via.jms" description="">
+        <antcall target="clean" />
+        <mkdir dir="${build.dir}" />
+        <javac debug="true" srcdir="src/test/java" destdir="${build.dir}" optimize="true">
+            <classpath refid="classpath" />
+        </javac>
+        <copy file="../build.properties" tofile="${build.dir}/messaging.properties" />
+        <antcall target="filter">
+            <param name="source.dir" value=".."/>
+            <param name="file.name" value="build.properties"/>
+            <param name="dest.dir" value="${build.dir}"/>
+        </antcall>
+        <copy file="${build.dir}/build.properties" tofile="${build.dir}/messaging.properties" overwrite="true" />
+
+        <java fork="yes" classname="org.jboss.gpse.gwReferences.SimpleProducer" failonerror="true">
+            <jvmarg value="-Xms16m" />
+            <jvmarg value="-Xmx64m" />
+            <jvmarg value="-Xss164k" />
+            <sysproperty key="log4j.configuration" value="file:${development.base}/conf/test/log4j.xml" />
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
 
     <target name="clean">
         <delete dir="${build.dir}" />

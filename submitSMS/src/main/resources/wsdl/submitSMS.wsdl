@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <definitions 
-    targetNamespace="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0" 
+    targetNamespace="urn:org.jboss.gpse.submitSMS:1.0" 
     xmlns="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:tns="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0"
+    xmlns:tns="urn:org.jboss.gpse.submitSMS:1.0"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     
   <types>
     <xsd:schema 
-        targetNamespace="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0" 
-        xmlns:tns="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0" 
+        targetNamespace="urn:org.jboss.gpse.submitSMS:1.0" 
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
         <xs:element name="sms" type="tns:sms"/>
         <xs:complexType name="sms">
@@ -48,7 +47,7 @@
   <binding name="SubmitSMSBinding" type="tns:SubmitSMSPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
     <operation name="acceptSMS">
-      <soap:operation soapAction="urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0"/>
+      <soap:operation soapAction="urn:org.jboss.gpse.submitSMS:1.0"/>
       <input>
         <soap:body use="literal"/>
       </input>

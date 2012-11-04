@@ -3,7 +3,7 @@ package org.jboss.gpse.gwReferences;
 import org.jboss.gpse.SMS;
 import org.jboss.gpse.SMSResponse;
 
-public interface ISubmitSMSReference {
+public interface IGWRefences {
+	SMSResponse helloSMS(SMS smsObject);
 
-    SMSResponse acceptSMS(SMS smsObj); 
 }

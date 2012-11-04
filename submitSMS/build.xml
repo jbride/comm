@@ -1,19 +1,15 @@
 <project name="submitSMS" default="all" basedir="." >
 
     <property environment="ENV"/>
-    <property file="../build.properties" />
+    <property file="../base.properties" />
     <path id="classpath" >
         <path refid="initial.classpath" />
     </path>
     <import file="${development.base}/base-build.xml"/>
+    <property file="../build.properties" />
 
     <target name="all" >
         <antcall target="clean" />
-        <antcall target="cli.batch" >
-            <param name="cli.source.dir" value="src/main/resources"/>
-            <param name="cli.to.filter.and.execute" value="project-config.cli"/>
-            <param name="cli.fail.on.error" value="false"/>
-        </antcall>
         <antcall target="jar" >
             <param name="jar.name" value="${organization.name}-${ant.project.name}" />
         </antcall>

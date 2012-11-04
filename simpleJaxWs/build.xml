@@ -1,0 +1,27 @@
+<project name="simpleJaxWs" default="all" basedir="." >
+
+    <property environment="ENV"/>
+    <property file="../base.properties" />
+    <path id="classpath" >
+        <path refid="initial.classpath" />
+    </path>
+    <import file="${development.base}/base-build.xml"/>
+    <property file="../build.properties" />
+
+    <target name="all" >
+        <antcall target="clean" />
+        <antcall target="war" >
+            <param name="war.name" value="${organization.name}-${ant.project.name}" />
+        </antcall>
+         <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
+            <arg value="--connect"/>
+            <arg value="--controller=${ENV.HOSTNAME}:${pfp.core.management.port}"/>
+            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.war --force"/>
+        </exec>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete file="transaction.log" />
+    </target>
+</project>

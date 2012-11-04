@@ -1,53 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<switchyard 
-    xmlns="urn:switchyard-config:switchyard:1.0" 
-    xmlns:bean="urn:switchyard-component-bean:config:1.0" 
-    xmlns:camel="urn:switchyard-component-camel:config:1.0" 
-    xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" 
-    xmlns:soap="urn:switchyard-component-soap:config:1.0" 
-    xmlns:transform="urn:switchyard-config:transform:1.0"
-    name="gwReferences" 
-    targetNamespace="urn:org.jboss.gpse.gwReferences:gwReferences:0.0.1-SNAPSHOT">
-
-  <sca:composite name="gwReferences" targetNamespace="urn:org.jboss.gpse.gwReferences:gwReferences:0.0.1-SNAPSHOT">
-
-    <sca:service name="IInvokeGWReference" promote="InvokeGWReference/IInvokeGWReference">
-      <camel:binding.file>
-        <camel:directory>/tmp</camel:directory>
-        <camel:fileName>test.txt</camel:fileName>
-        <camel:delay>5000</camel:delay>
-        <camel:delete>true</camel:delete>
-      </camel:binding.file>
-    </sca:service>
-
-    <sca:component name="InvokeGWReference">
-      <bean:implementation.bean class="org.jboss.gpse.gwReferences.InvokeGWReference"/>
-      <sca:service name="IInvokeGWReference">
-        <sca:interface.java interface="org.jboss.gpse.gwReferences.IInvokeGWReference"/>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:common_selector="urn:switchyard-component-common-selector:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0" xmlns:transform="urn:switchyard-config:transform:1.0" name="gwReferences" targetNamespace="urn:org.jboss.gpse:gwReferences:1.0">
+  <sca:composite name="gwReferences" targetNamespace="urn:org.jboss.gpse:gwReferences:1.0">
+    <sca:component name="gwReferencesComponent">
+      <bean:implementation.bean class="org.jboss.gpse.gwReferences.GWRefencesBean"/>
+      <sca:service name="IGWRefences">
+        <sca:interface.java interface="org.jboss.gpse.gwReferences.IGWRefences"/>
       </sca:service>
-      <sca:reference name="ISubmitSMSReference">
-        <interface.java interface="org.jboss.gpse.gwReferences.ISubmitSMSReference"/>
+      <sca:reference name="ISimpleJaxWs">
+        <sca:interface.java interface="org.jboss.gpse.simpleJaxWs.ISimpleJaxWs"/>
       </sca:reference>
     </sca:component>
-
-    <sca:reference name="ISubmitSMSReference" multiplicity="1..1" promote="InvokeGWReference/ISubmitSMSReference">
-      <camel:binding.camel configURI="cxf:bean:http://${ENV.HOSTNAME}:8080/submitSMS/ISubmitSMS"/>
+    <sca:service name="IGWRefences" promote="gwReferencesComponent/IGWRefences">
+      <sca:interface.java interface="org.jboss.gpse.gwReferences.IGWRefences"/>
+      <camel:binding.jms>
+        <common_selector:operationSelector operationName="helloSMS"/>
+        <camel:queue>${org.jboss.gpse.gwReferences.queue}</camel:queue>
+        <camel:connectionFactory>#ConnectionFactory</camel:connectionFactory>
+      </camel:binding.jms>
+    </sca:service>
+    <sca:reference name="ISimpleJaxWs" multiplicity="0..1" promote="gwReferencesComponent/ISimpleJaxWs">
+      <sca:interface.java interface="org.jboss.gpse.simpleJaxWs.ISimpleJaxWs"/>
+      <soap:binding.soap>
+        <soap:contextMapper/>
+        <soap:wsdl>${org.jboss.gpse.simpleJaxWs.wsdl.url}</soap:wsdl>
+        <soap:wsdlPort>SimpleJaxWsPort</soap:wsdlPort>
+      </soap:binding.soap>
     </sca:reference>
-
   </sca:composite>
-
-    <transforms >
-        <transform.java xmlns="urn:switchyard-config:transform:1.0" class="org.jboss.gpse.gwReferences.Transformers" from="java:org.jboss.gpse.SMS" to="{urn:org.jboss.gpse.gwReferences:bean-service:1.0}domSMS"/>
-        <transform.java xmlns="urn:switchyard-config:transform:1.0" class="org.jboss.gpse.gwReferences.Transformers" from="{urn:org.jboss.gpse.gwReferences:bean-service:1.0}domSMSResponse" to="java:org.jboss.gpse.SMSResponse"/>
-        <transform:transform.jaxb 
-            from="java:org.jboss.gpse.SMS"
-            to="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}sms" 
-            contextPath="org.jboss.gpse.submitSMS"
-        />
-        <transform:transform.jaxb 
-            from="java:org.jboss.gpse.SMSResponse"
-            to="{urn:org.jboss.gpse.submitSMS:transform-jaxb:1.0}smsResponse" 
-            contextPath="org.jboss.gpse.submitSMS"
-        />
-    </transforms>
+  <transforms>
+    <transform:transform.jaxb from="{urn:org.jboss.gpse:transform-jaxb:1.0}smsResponse" to="java:org.jboss.gpse.SMSResponse" contextPath="org.jboss.gpse"/>
+    <transform:transform.jaxb from="java:org.jboss.gpse.SMS" to="{urn:org.jboss.gpse:transform-jaxb:1.0}sms" contextPath="org.jboss.gpse"/>
+    <transform:transform.jaxb to="java:org.jboss.gpse.SMS" from="{urn:org.jboss.gpse:transform-jaxb:1.0}sms" contextPath="org.jboss.gpse"/>
+  </transforms>
 </switchyard>
