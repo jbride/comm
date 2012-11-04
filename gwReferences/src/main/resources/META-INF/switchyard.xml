@@ -28,8 +28,7 @@
     </sca:reference>
   </sca:composite>
   <transforms>
-    <transform:transform.jaxb from="{urn:org.jboss.gpse:transform-jaxb:1.0}smsResponse" to="java:org.jboss.gpse.SMSResponse" contextPath="org.jboss.gpse"/>
-    <transform:transform.jaxb from="java:org.jboss.gpse.SMS" to="{urn:org.jboss.gpse:transform-jaxb:1.0}sms" contextPath="org.jboss.gpse"/>
-    <transform:transform.jaxb to="java:org.jboss.gpse.SMS" from="{urn:org.jboss.gpse:transform-jaxb:1.0}sms" contextPath="org.jboss.gpse"/>
+    <transform:transform.jaxb from="{urn:org.jboss.gpse:1.0}smsResponse" to="java:org.jboss.gpse.SMSResponse" contextPath="org.jboss.gpse"/>
+    <transform:transform.jaxb from="java:org.jboss.gpse.SMS" to="{urn:org.jboss.gpse:1.0}sms" contextPath="org.jboss.gpse"/>
   </transforms>
 </switchyard>

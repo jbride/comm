@@ -20,7 +20,7 @@ public class JaxWSClient {
     private static final String CPID = "org.jboss.gpse.submitSMS.cpid";
 
     private static Logger log = Logger.getLogger(JaxWSClient.class);
-    private static String namespaceURI = "urn:org.jboss.gpse.submitSMS:1.0";
+    private static String namespaceURI = "urn:org.jboss.gpse:1.0";
     private static String serviceName = "ISubmitSMS";
 
     public static void main(String[] args){
