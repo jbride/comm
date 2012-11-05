@@ -64,5 +64,14 @@
 			<attribute name="maven.scope" value="provided"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="/switchyard-component-common"/>
+	<classpathentry kind="lib" path="/home/jbride/.m2/repository/org/apache/camel/camel-core/2.10.0/camel-core-2.10.0.jar" sourcepath="/home/jbride/.m2/repository/org/apache/camel/camel-core/2.10.0/camel-core-2.10.0-sources.jar">
+		<attributes>
+			<attribute name="maven.groupId" value="org.apache.camel"/>
+			<attribute name="maven.artifactId" value="camel-core"/>
+			<attribute name="maven.version" value="2.10.0"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

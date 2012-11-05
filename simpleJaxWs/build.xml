@@ -20,6 +20,21 @@
         </exec>
     </target>
 
+    <target name="consume" description="">
+        <antcall target="clean" />
+        <taskdef name="wsconsume" classname="org.jboss.ws.tools.ant.WSConsumeTask" >
+            <classpath refid="classpath" />
+        </taskdef>
+        <wsconsume
+            fork="true"
+            destdir="${build.dir}"
+            keep="true"
+            package="org.jboss.gpse"
+            verbose="true"
+            wsdl="http://zareason:8080/pfp-simpleJaxWs/SimpleJaxWsService?wsdl" >
+        </wsconsume>
+    </target>
+
     <target name="clean">
         <delete dir="${build.dir}" />
         <delete file="transaction.log" />

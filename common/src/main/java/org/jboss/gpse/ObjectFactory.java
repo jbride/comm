@@ -29,22 +29,22 @@ public class ObjectFactory {
 
     public SMS createSMS() {
     	SMS smsObj = new SMS();
-        return null;
+        return smsObj;
     }
     public SMSResponse createSMSResponse() {
     	SMSResponse smsResponse = new SMSResponse();
-        return null;
+        return smsResponse;
     }
 
     @XmlElementDecl(namespace = "urn:org.jboss.gpse:1.0", name = "sms")
     public JAXBElement<SMS> createSMS(SMS value) {
         JAXBElement jElement = new JAXBElement<SMS>(_SMS_QNAME, SMS.class, null, value);
-        return null;
+        return jElement;
     }
 
     @XmlElementDecl(namespace = "urn:org.jboss.gpse:1.0", name = "smsResponse")
     public JAXBElement<SMSResponse> createSMSResponse(SMSResponse value) {
         JAXBElement jElement = new JAXBElement<SMSResponse>(_SMS_RESPONSE_QNAME, SMSResponse.class, null, value);
-        return null;
+        return jElement;
     }
 }

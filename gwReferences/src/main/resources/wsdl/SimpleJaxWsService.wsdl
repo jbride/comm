@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="SimpleJaxWsService" targetNamespace="http://org.jboss.gpse.simpleJaxWS" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://org.jboss.gpse.simpleJaxWS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema targetNamespace="urn:org.jboss.gpse:1.0" version="1.0" xmlns:ns1="http://org.jboss.gpse.simpleJaxWS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:import namespace="http://org.jboss.gpse.simpleJaxWS"/>
+<xs:element name="sms" type="ns1:sms"/>
+<xs:element name="smsResponse" type="ns1:smsResponse"/>
+</xs:schema>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://org.jboss.gpse.simpleJaxWS" version="1.0" xmlns:tns="http://org.jboss.gpse.simpleJaxWS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="acceptSMS" type="tns:acceptSMS"/>
+<xs:element name="acceptSMSResponse" type="tns:acceptSMSResponse"/>
+<xs:element name="sms" type="tns:sms"/>
+<xs:element name="smsResponse" type="tns:smsResponse"/>
+<xs:complexType name="acceptSMS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:sms"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="sms">
+    <xs:sequence>
+      <xs:element name="cpid" type="xs:int"/>
+      <xs:element name="sender" type="xs:int"/>
+      <xs:element name="senderS" type="xs:string"/>
+      <xs:element name="text" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="acceptSMSResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:smsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="smsResponse">
+    <xs:sequence>
+      <xs:element name="cpid" type="xs:int"/>
+      <xs:element name="sender" type="xs:int"/>
+      <xs:element name="errorCode" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="acceptSMS">
+    <wsdl:part element="tns:acceptSMS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="acceptSMSResponse">
+    <wsdl:part element="tns:acceptSMSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SimpleJaxWsService">
+    <wsdl:operation name="acceptSMS">
+      <wsdl:input message="tns:acceptSMS" name="acceptSMS">
+    </wsdl:input>
+      <wsdl:output message="tns:acceptSMSResponse" name="acceptSMSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SimpleJaxWsServiceSoapBinding" type="tns:SimpleJaxWsService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="acceptSMS">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="acceptSMS">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="acceptSMSResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SimpleJaxWsService">
+    <wsdl:port binding="tns:SimpleJaxWsServiceSoapBinding" name="SimpleJaxWsPort">
+      <soap:address location="http://zareason:8080/pfp-simpleJaxWs/SimpleJaxWsService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

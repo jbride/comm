@@ -14,7 +14,6 @@
 
 
     <sca:service name="ISubmitSMS" promote="submitSMSComponent/ISubmitSMS">
-    <!--sca:service name="SubmitSMSviaSOAP" promote="submitSMSComponent/ISubmitSMS" -->
         <sca:interface.wsdl interface="wsdl/submitSMS.wsdl#wsdl.porttype(SubmitSMSPortType)"/>
         <soap:binding.soap>
             <soap:wsdl>wsdl/submitSMS.wsdl</soap:wsdl>

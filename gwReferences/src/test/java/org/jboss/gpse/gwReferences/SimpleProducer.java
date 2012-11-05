@@ -13,7 +13,7 @@ import org.jboss.gpse.SMSResponse;
 public class SimpleProducer {
 
     private static final String PROPERTIES_FILE_NAME = "/messaging.properties";
-    private static final String CONNECTION_FACTORY_NAME = "org.jboss.gpse.messaging.connectionFactory";
+    private static final String CONNECTION_FACTORY_NAME = "connectionfactory";
     private static final String QUEUE_URL_PATH = "queueUrlPath";
     private static final String TEXT = "org.jboss.gpse.gwReferences.text";
     private static final String CPID = "org.jboss.gpse.gwReferences.cpid";
@@ -40,8 +40,7 @@ public class SimpleProducer {
             }
             System.out.println("main() properties = "+sBuilder.toString());
             Thread.sleep(500);
-            Properties env = new Properties();
-            jmsProviderContext = new InitialContext();
+            jmsProviderContext = new InitialContext(properties);
 
 
             final ConnectionFactory connectionFactory = (ConnectionFactory) jmsProviderContext.lookup((String)properties.get(CONNECTION_FACTORY_NAME));

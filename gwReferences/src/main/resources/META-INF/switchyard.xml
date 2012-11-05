@@ -7,7 +7,7 @@
         <sca:interface.java interface="org.jboss.gpse.gwReferences.IGWRefences"/>
       </sca:service>
       <sca:reference name="ISimpleJaxWs">
-        <sca:interface.java interface="org.jboss.gpse.simpleJaxWs.ISimpleJaxWs"/>
+        <sca:interface.wsdl interface="wsdl/SimpleJaxWsService.wsdl#wsdl.porttype(SimpleJaxWsService)"/>
       </sca:reference>
     </sca:component>
     <sca:service name="IGWRefences" promote="gwReferencesComponent/IGWRefences">
@@ -19,16 +19,13 @@
       </camel:binding.jms>
     </sca:service>
     <sca:reference name="ISimpleJaxWs" multiplicity="0..1" promote="gwReferencesComponent/ISimpleJaxWs">
-      <sca:interface.java interface="org.jboss.gpse.simpleJaxWs.ISimpleJaxWs"/>
+      <sca:interface.wsdl interface="wsdl/SimpleJaxWsService.wsdl#wsdl.porttype(SimpleJaxWsService)"/>
       <soap:binding.soap>
         <soap:contextMapper/>
+        <soap:messageComposer/>
         <soap:wsdl>${org.jboss.gpse.simpleJaxWs.wsdl.url}</soap:wsdl>
         <soap:wsdlPort>SimpleJaxWsPort</soap:wsdlPort>
       </soap:binding.soap>
     </sca:reference>
   </sca:composite>
-  <transforms>
-    <transform:transform.jaxb from="{urn:org.jboss.gpse:1.0}smsResponse" to="java:org.jboss.gpse.SMSResponse" contextPath="org.jboss.gpse"/>
-    <transform:transform.jaxb from="java:org.jboss.gpse.SMS" to="{urn:org.jboss.gpse:1.0}sms" contextPath="org.jboss.gpse"/>
-  </transforms>
 </switchyard>
