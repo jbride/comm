@@ -2,10 +2,8 @@
 
     <property environment="ENV"/>
     <property file="../base.properties" />
-    <path id="classpath" >
-        <path refid="initial.classpath" />
-    </path>
     <import file="${development.base}/base-build.xml"/>
+    <property name="project.path.property" value="${sy.module.path}" />
     <property file="../build.properties" />
 
     <target name="all" >
@@ -15,7 +13,7 @@
         </antcall>
          <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
             <arg value="--connect"/>
-            <arg value="--controller=${ENV.HOSTNAME}:${pfp.core.management.port}"/>
+            <arg value="--controller=${sy.core.ip.address}:${sy.core.management.port}"/>
             <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force"/>
         </exec>
     </target>
@@ -27,6 +25,7 @@
 
     <target name="send.SMS.via.jms" description="">
         <antcall target="testPrep" />
+        <math result="sy.core.remoting.port" operand1="${base.remoting.port}" operation="+" operand2="${sy.core.port.offset}" datatype="int" />
         <antcall target="filter" >
             <param name="source.dir" value="src/test/resources" />
             <param name="dest.dir" value="${build.dir}" />

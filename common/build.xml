@@ -16,19 +16,21 @@
             <param name="cli.source.dir" value="src/main/resources"/>
             <param name="cli.to.filter.and.execute" value="project-config.cli"/>
             <param name="cli.fail.on.error" value="false"/>
+            <param name="server.ip.address" value="${sy.core.ip.address}"/>
+            <param name="management.port" value="${sy.core.management.port}"/>
         </antcall>
         <antcall target="configure.jboss.modules" />
         <antcall target="jar" >
             <param name="jar.name" value="${project.name}-common" />
         </antcall>
-        <copy file="${build.dir}/${project.name}-common.jar"  todir="${jboss.home}/modules/org/jboss/gpse/main" overwrite="true" />
-        <antcall target="bounce.pfp.core" />
+        <copy file="${build.dir}/${project.name}-common.jar"  todir="${sy.module.path}/org/jboss/gpse/main" overwrite="true" />
+        <antcall target="local.sy.bounce.core" />
     </target>
 
     <target name="configure.jboss.modules" >
         <antcall target="filter">
             <param name="source.dir" value="conf/jboss/modules"/>
-            <param name="dest.dir" value="${jboss.home}/modules"/>
+            <param name="dest.dir" value="${sy.module.path}"/>
         </antcall>
     </target>
 

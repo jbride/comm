@@ -1,25 +1,23 @@
-<project name="simpleJaxWs" default="all" basedir="." >
+<project name="bpm-sanityCheck" default="all" basedir="." >
 
     <property environment="ENV"/>
     <property file="../base.properties" />
     <import file="${development.base}/base-build.xml"/>
-    <property name="project.path.property" value="${sy.module.path}" />
     <property file="../build.properties" />
 
     <target name="all" >
         <antcall target="clean" />
-        <antcall target="war" >
-            <param name="war.name" value="${organization.name}-${ant.project.name}" />
+        <antcall target="jar" >
+            <param name="jar.name" value="${organization.name}-${ant.project.name}" />
         </antcall>
          <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
             <arg value="--connect"/>
             <arg value="--controller=${sy.core.ip.address}:${sy.core.management.port}"/>
-            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.war --force"/>
+            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force"/>
         </exec>
     </target>
 
     <target name="clean">
         <delete dir="${build.dir}" />
-        <delete file="transaction.log" />
     </target>
 </project>

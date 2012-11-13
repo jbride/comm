@@ -1,0 +1,10 @@
+//created on: Nov 12, 2012
+package org.jboss.processFlow
+
+rule "sanity check"
+    ruleflow-group "bizRuleGroup"
+    when
+        eval(true)
+    then
+        System.out.println("sanityCheckout() yes ... this works");
+end
