@@ -16,21 +16,23 @@
             <param name="cli.source.dir" value="src/main/resources"/>
             <param name="cli.to.filter.and.execute" value="project-config.cli"/>
             <param name="cli.fail.on.error" value="false"/>
-            <param name="server.ip.address" value="${sy.core.ip.address}"/>
-            <param name="management.port" value="${sy.core.management.port}"/>
         </antcall>
         <antcall target="configure.jboss.modules" />
         <antcall target="jar" >
             <param name="jar.name" value="${project.name}-common" />
         </antcall>
-        <copy file="${build.dir}/${project.name}-common.jar"  todir="${sy.module.path}/org/jboss/gpse/main" overwrite="true" />
-        <antcall target="local.sy.bounce.core" />
+        <copy file="${build.dir}/${project.name}-common.jar"  todir="${project.module.path}/org/jboss/gpse/main" overwrite="true" />
+        <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
+            <arg value="--connect"/>
+            <arg value="--controller=${os.hostname}:${management.port}"/>
+            <arg value="/server-group=sy-core-group/:restart-servers"/>
+        </exec>
     </target>
 
     <target name="configure.jboss.modules" >
         <antcall target="filter">
-            <param name="source.dir" value="conf/jboss/modules"/>
-            <param name="dest.dir" value="${sy.module.path}"/>
+            <param name="source.dir" value="conf/jboss/${organization.name}Modules"/>
+            <param name="dest.dir" value="${project.module.path}"/>
         </antcall>
     </target>
 

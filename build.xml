@@ -10,16 +10,28 @@
         <sequential>
             <subant target="@{target}">
                 <fileset dir="common" includes="build.xml"/>
-                <fileset dir="simpleJaxWs" includes="build.xml"/>
+                <!--fileset dir="simpleJaxWs" includes="build.xml"/ -->
                 <fileset dir="submitSMS" includes="build.xml"/>
-                <fileset dir="submitMMS" includes="build.xml"/>
-                <fileset dir="gwReferences" includes="build.xml"/>
-                <fileset dir="bpm-sanityCheck" includes="build.xml"/>
+                <!--fileset dir="submitMMS" includes="build.xml"/ -->
+                <!--fileset dir="gwReferences" includes="build.xml"/>
+                <fileset dir="bpm-sanityCheck" includes="build.xml"/ -->
             </subant>
         </sequential>
     </macrodef>
 
-    <target name="all"><iterate target="all"/></target>
+    <!--    
+        pass following parameters to this target :
+        1)  bounce.servers  :   optional 
+    -->
+    <target name="all">
+        <iterate target="all"/>
+        <if>
+            <not><equals arg1="${bounce.servers}" arg2="false" /></not>
+            <then>
+                <antcall target="local.bounce.all.servers" />
+            </then>
+        </if>
+    </target>
     <target name="clean"><iterate target="clean"/></target>
 
 </project>

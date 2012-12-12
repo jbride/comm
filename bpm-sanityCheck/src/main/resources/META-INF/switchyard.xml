@@ -2,7 +2,7 @@
 <switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bpm="urn:switchyard-component-bpm:config:1.0" xmlns:resteasy="urn:switchyard-component-resteasy:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="bpm-example" targetNamespace="urn:org.jboss.processFlow:bpm-example:0.0.1-SNAPSHOT">
   <sca:composite name="bpm-example" targetNamespace="urn:org.jboss.processFlow:bpm-example:0.0.1-SNAPSHOT">
     <sca:component name="WorkFlow-with-rules">
-      <bpm:implementation.bpm processDefinition="workFlow-with-rule.bpmn" processId="workFlow-with-rule" messageContentInName="pIn" messageContentOutName="pOut" persistent="${bpm-sanityCheck.persistent}" agent="${bpm-sanityCheck.agent}">
+      <bpm:implementation.bpm processDefinition="${bpm-sanityCheck.processDefinition}" processId="workFlow-with-rule" messageContentInName="pIn" messageContentOutName="pOut" persistent="${bpm-sanityCheck.persistent}" agent="${bpm-sanityCheck.agent}">
         <bpm:audit/>
         <bpm:action name="start" type="START_PROCESS"/>
         <bpm:eventListener class="classname"/>

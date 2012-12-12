@@ -3,18 +3,23 @@
     <property environment="ENV"/>
     <property file="../base.properties" />
     <import file="${development.base}/base-build.xml"/>
-    <property name="project.path.property" value="${sy.module.path}" />
+    <property name="project.path.property" value="${project.module.path}" />
     <property file="../build.properties" />
 
     <target name="all" >
         <antcall target="clean" />
+        <antcall target="cli.batch" >
+            <param name="cli.source.dir" value="src/main/resources"/>
+            <param name="cli.to.filter.and.execute" value="project-config-down.cli"/>
+            <param name="cli.fail.on.error" value="false"/>
+        </antcall>
         <antcall target="jar" >
             <param name="jar.name" value="${organization.name}-${ant.project.name}" />
         </antcall>
          <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
             <arg value="--connect"/>
-            <arg value="--controller=${sy.core.ip.address}:${sy.core.management.port}"/>
-            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force"/>
+            <arg value="--controller=${pfp.core.host.name}:${management.port}"/>
+            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --name=${organization.name}-${ant.project.name}.jar --server-groups=${sy.core.group}"/>
         </exec>
     </target>
 
@@ -40,8 +45,7 @@
         </java>
     </target>
 
-     <target name="send.SMS.via.SOAP" description="">
-        <antcall target="testPrep" />
+     <target name="send.SMS.via.SOAP" description="" depends="setClasspath,testPrep" >
         <java fork="yes" classname="org.jboss.gpse.submitSMS.JaxWSClient" failonerror="true">
             <jvmarg value="-Xms16m" />
             <jvmarg value="-Xmx64m" />
@@ -56,6 +60,8 @@
     <!-- generate JaxWS stubs from wsdl -->
     <target name="testPrep" >
         <antcall target="clean" />
+        <math result="sy.core.server.0.http.port" operand1="8080" operation="+" operand2="${sy.core.base.port.offset}" datatype="int" />
+        <property name="org.jboss.gpse.submitSMS.wsdl.url" value="http://${ENV.HOSTNAME}:${sy.core.server.0.http.port}/submitSMS/ISubmitSMS?wsdl" />
         <mkdir dir="${build.dir}" />
         <taskdef name="wsconsume" classname="org.jboss.ws.tools.ant.WSConsumeTask" >
             <classpath refid="classpath" />
@@ -66,7 +72,7 @@
             keep="true"
             package="org.jboss.gpse.submitSMS.jaxb"
             verbose="true"
-            wsdl="http://${ENV.HOSTNAME}:8080/submitSMS/ISubmitSMS?wsdl" >
+            wsdl="${org.jboss.gpse.submitSMS.wsdl.url}" >
         </wsconsume>
         <javac debug="true" srcdir="src/test/java" destdir="${build.dir}" optimize="true">
             <classpath refid="classpath" />

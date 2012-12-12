@@ -3,7 +3,7 @@
     <property environment="ENV"/>
     <property file="../base.properties" />
     <import file="${development.base}/base-build.xml"/>
-    <property name="project.path.property" value="${sy.module.path}" />
+    <property name="project.path.property" value="${project.module.path}" />
     <property file="../build.properties" />
 
     <target name="all" >

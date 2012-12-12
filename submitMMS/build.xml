@@ -1,14 +1,18 @@
 <project name="submitMMS" default="all" >
+
     <property environment="ENV"/>
     <property file="../base.properties" />
-    <path id="classpath" >
-        <path refid="initial.classpath" />
-    </path>
     <import file="${development.base}/base-build.xml"/>
+    <property name="project.path.property" value="${project.module.path}" />
     <property file="../build.properties" />
 
     <target name="all" >
         <antcall target="clean" />
+        <antcall target="cli.batch" >
+            <param name="cli.source.dir" value="src/main/resources"/>
+            <param name="cli.to.filter.and.execute" value="project-config-down.cli"/>
+            <param name="cli.fail.on.error" value="false"/>
+        </antcall>
         <antcall target="cli.batch" >
             <param name="cli.source.dir" value="src/main/resources"/>
             <param name="cli.to.filter.and.execute" value="project-config.cli"/>
@@ -17,17 +21,21 @@
         <antcall target="jar" >
             <param name="jar.name" value="${organization.name}-${ant.project.name}" />
         </antcall>
-        <antcall target="cli.command" >
-            <param name="cli.command" value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --force "/>
-        </antcall>
+        <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
+            <arg value="--connect"/>
+            <arg value="--controller=${pfp.core.host.name}:${management.port}"/>
+            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}.jar --name=${organization.name}-${ant.project.name}.jar --server-groups=${sy.core.group}"/>
+        </exec>
 
         <antcall target="clean" />
         <antcall target="war" >
             <param name="war.name" value="${organization.name}-${ant.project.name}-war" />
         </antcall>
-        <antcall target="cli.command" >
-            <param name="cli.command" value="deploy ${build.dir}/${organization.name}-${ant.project.name}-war.war --force "/>
-        </antcall>
+        <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
+            <arg value="--connect"/>
+            <arg value="--controller=${pfp.core.host.name}:${management.port}"/>
+            <arg value="deploy ${build.dir}/${organization.name}-${ant.project.name}-war.war --name=${organization.name}-${ant.project.name}-war.war --server-groups=${sy.core.group}"/>
+        </exec>
     </target>
 
     <target name="clean">
