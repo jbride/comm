@@ -28,14 +28,17 @@
         <delete file="transaction.log" />
     </target>
 
-    <target name="send.SMS.via.jms" description="">
-        <antcall target="testPrep" />
-        <math result="sy.core.remoting.port" operand1="${base.remoting.port}" operation="+" operand2="${sy.core.port.offset}" datatype="int" />
+    <target name="send.SMS.via.jms" description="" depends="setClasspath">
+        <antcall target="clean" />
+        <mkdir dir="${build.dir}" />
+        <javac debug="true" srcdir="src/test/java" destdir="${build.dir}" includes="org/jboss/gpse/submitSMS/jms/*.java" optimize="true">
+            <classpath refid="classpath" />
+        </javac>
+        <math result="pfp.core.remoting.port" operand1="${base.remoting.port}" operation="+" operand2="${pfp.core.base.port.offset}" datatype="int"/>
         <antcall target="filter" >
             <param name="source.dir" value="src/test/resources" />
             <param name="dest.dir" value="${build.dir}" />
         </antcall>
-
         <java fork="yes" classname="org.jboss.gpse.submitSMS.SimpleProducer" failonerror="true">
             <jvmarg value="-Xms16m" />
             <jvmarg value="-Xmx64m" />
@@ -74,7 +77,7 @@
             verbose="true"
             wsdl="${org.jboss.gpse.submitSMS.wsdl.url}" >
         </wsconsume>
-        <javac debug="true" srcdir="src/test/java" destdir="${build.dir}" optimize="true">
+        <javac debug="true" srcdir="src/test/java" destdir="${build.dir}" includes="org/jboss/gpse/submitSMS/jaxws/*.java" optimize="true">
             <classpath refid="classpath" />
         </javac>
     </target>

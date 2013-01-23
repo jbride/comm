@@ -22,13 +22,13 @@
         </soap:binding.soap>
     </sca:service>
 
-    <!--sca:service name="SubmitSMSviaJMS" promote="submitSMSComponent/ISubmitSMS">
+    <sca:service name="SubmitSMSviaJMS" promote="submitSMSComponent/ISubmitSMS">
         <camel:binding.jms>
             <camel:operationSelector operationName="acceptSMS"/>
             <camel:queue>${org.jboss.gpse.submitSMS.queue}</camel:queue>
-            <camel:connectionFactory>#ConnectionFactory</camel:connectionFactory>
+            <camel:connectionFactory>java:/RemoteConnectionFactory</camel:connectionFactory>
         </camel:binding.jms>
-    </sca:service -->
+    </sca:service>
 
     <sca:component name="submitSMSComponent">
         <bean:implementation.bean class="org.jboss.gpse.submitSMS.SubmitSMSBean"/>

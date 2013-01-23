@@ -1,0 +1,5 @@
+batch
+/server-group=sy-core-group/deployment=${organization.name}-${ant.project.name}.jar/:undeploy
+/server-group=sy-core-group/deployment=${organization.name}-${ant.project.name}.jar/:remove
+/deployment=${organization.name}-${ant.project.name}.jar/:remove
+run-batch

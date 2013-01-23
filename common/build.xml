@@ -17,23 +17,14 @@
             <param name="cli.to.filter.and.execute" value="project-config.cli"/>
             <param name="cli.fail.on.error" value="false"/>
         </antcall>
-        <antcall target="configure.jboss.modules" />
         <antcall target="jar" >
             <param name="jar.name" value="${project.name}-common" />
         </antcall>
-        <copy file="${build.dir}/${project.name}-common.jar"  todir="${project.module.path}/org/jboss/gpse/main" overwrite="true" />
-        <exec executable="${jboss.home}/bin/jboss-cli.sh" failonerror="true">
-            <arg value="--connect"/>
-            <arg value="--controller=${os.hostname}:${management.port}"/>
-            <arg value="/server-group=sy-core-group/:restart-servers"/>
-        </exec>
-    </target>
-
-    <target name="configure.jboss.modules" >
         <antcall target="filter">
             <param name="source.dir" value="conf/jboss/${organization.name}Modules"/>
             <param name="dest.dir" value="${project.module.path}"/>
         </antcall>
+        <copy file="${build.dir}/${project.name}-common.jar"  todir="${project.module.path}/org/jboss/gpse/main" overwrite="true" />
     </target>
 
     <target name="clean">
