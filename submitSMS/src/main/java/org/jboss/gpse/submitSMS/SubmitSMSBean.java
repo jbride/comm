@@ -23,15 +23,23 @@ public class SubmitSMSBean implements ISubmitSMS {
     private IRoutingService rService;
 
     public SMSResponse acceptSMS(SMS smsObj) {
-        log.info("acceptSMS() sms = "+smsObj);
-        SMSResponse smsResponse = new SMSResponse();
-        smsObj.setSmsResponse(smsResponse);
-        smsRequestValidationService.executeValidation(smsObj);
-        if(smsResponse.getErrorCode() == SMSResponse.STATUS_GOOD) {
-            rService.processRoute(smsObj);
+        try {
+            log.info("acceptSMS() sms = "+smsObj);
+            SMSResponse smsResponse = new SMSResponse();
+            smsObj.setSmsResponse(smsResponse);
+            smsRequestValidationService.executeValidation(smsObj);
+            if(smsResponse.getErrorCode() == SMSResponse.STATUS_GOOD) {
+                rService.processRoute(smsObj);
+            }
+            log.info("acceptSMS() errorCode = "+smsResponse.getErrorCode());
+            return smsResponse;
+        }catch(Throwable x) {
+            x.printStackTrace();
+            throw x;
         }
-        log.info("acceptSMS() errorCode = "+smsResponse.getErrorCode());
-        return smsResponse;
+    }
+    public void acceptSMSOneWay(SMS smsObj) {
+        log.info("acceptSMSOneWay() sms = "+smsObj);
     }
 
     public void health(String payload){

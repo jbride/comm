@@ -8,13 +8,14 @@
     xmlns:soap="urn:switchyard-component-soap:config:1.0"
     xmlns:transform="urn:switchyard-config:transform:1.0"
     xmlns:hornetq="urn:switchyard-component-hornetq:config:1.0"
+    xmlns:jca="urn:switchyard-component-jca:config:1.0"
     name="submitSMS" 
     targetNamespace="urn:org.jboss.gpse:submitSMS:0.0.1-SNAPSHOT">
 
   <sca:composite name="submitSMS" targetNamespace="urn:org.jboss.gpse:submitSMS:0.0.1-SNAPSHOT">
 
 
-    <sca:service name="ISubmitSMS" promote="submitSMSComponent/ISubmitSMS">
+    <sca:service name="submitSMSviaSOAP" promote="submitSMSComponent/ISubmitSMS">
         <sca:interface.wsdl interface="wsdl/submitSMS.wsdl#wsdl.porttype(SubmitSMSPortType)"/>
         <soap:binding.soap>
             <soap:wsdl>wsdl/submitSMS.wsdl</soap:wsdl>
@@ -23,24 +24,24 @@
         </soap:binding.soap>
     </sca:service>
 
-    <sca:service name="SubmitSMSviaJMS" promote="submitSMSComponent/ISubmitSMS">
-        <!--camel:binding.jms>
-            <camel:operationSelector operationName="acceptSMS"/>
-            <camel:queue>${org.jboss.gpse.submitSMS.queue}</camel:queue>
-            <camel:connectionFactory>#emoteConnectionFactory</camel:connectionFactory>
-        </camel:binding.jms -->
-        <hornetq:binding.hornetq>
-            <operationSelector xmlns="urn:switchyard-config:switchyard:1.0" operationName="acceptSMS"/>
-            <hornetq:config>
-                <hornetq:queue>jms.queue.${org.jboss.gpse.submitSMS.queue}</hornetq:queue>
-                <hornetq:discoveryGroup>
-                    <hornetq:groupAddress>${jboss.messaging.group.address}</hornetq:groupAddress>
-                    <hornetq:groupPort>${jboss.messaging.group.port}</hornetq:groupPort>
-                </hornetq:discoveryGroup>
-                <hornetq:useHA>TRUE</hornetq:useHA>
-                <hornetq:reconnectAttempts>-1</hornetq:reconnectAttempts>
-            </hornetq:config>
-        </hornetq:binding.hornetq>
+    <sca:service name="submitSMSviaJMS" promote="submitSMSComponent/ISubmitSMS">
+        <binding.jca xmlns="urn:switchyard-component-jca:config:1.0">
+            <operationSelector xmlns="urn:switchyard-config:switchyard:1.0" operationName="acceptSMSOneWay"/>
+               <inboundConnection>
+                   <resourceAdapter name="hornetq-ra.rar">
+                   </resourceAdapter>
+                   <activationSpec>
+                       <property name="destinationType" value="javax.jms.Queue"/>
+                       <property name="destination" value="${org.jboss.gpse.submitSMS.queue}"/>
+                   </activationSpec>
+               </inboundConnection>
+               <inboundInteraction>
+                   <listener>javax.jms.MessageListener</listener>
+                   <endpoint type="org.switchyard.component.jca.endpoint.JMSEndpoint"/>
+                   <transacted>true</transacted>
+               </inboundInteraction>
+        </binding.jca>
+
     </sca:service>
 
     <sca:component name="submitSMSComponent">
@@ -143,6 +144,11 @@
         from="java:org.jboss.gpse.SMSResponse"
         to="{urn:org.jboss.gpse:1.0}smsResponse" 
         contextPath="org.jboss.gpse"
+    />
+    <transform:transform.java 
+        class="org.jboss.gpse.submitSMS.ByteToSmsTransformer"
+        from="java:byte[]"
+        to="java:org.jboss.gpse.SMS" 
     />
   </transforms>
 

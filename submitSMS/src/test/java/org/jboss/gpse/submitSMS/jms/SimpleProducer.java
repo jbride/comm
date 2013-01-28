@@ -1,5 +1,8 @@
 package org.jboss.gpse.submitSMS;
 
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.Properties;
 import java.util.Map;
 
@@ -26,6 +29,8 @@ public class SimpleProducer {
         Context jmsProviderContext = null;
         Connection connObj = null;
         Session sessionObj = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
         try {
             properties.load(SimpleProducer.class.getResourceAsStream(PROPERTIES_FILE_NAME));
             if(properties.size() == 0)
@@ -59,9 +64,14 @@ public class SimpleProducer {
             if(properties.get(CPID) != null) {
                 smsObj.setCpid(Integer.parseInt((String)properties.get(CPID)));
             }
-            ObjectMessage oMessage = sessionObj.createObjectMessage();
-            oMessage.setObject(smsObj);
-            simpleProducer.send(oMessage);
+            //ObjectMessage oMessage = sessionObj.createObjectMessage();
+            BytesMessage bMessage = sessionObj.createBytesMessage();
+            out = new ObjectOutputStream(bos);   
+            out.writeObject(smsObj);
+            byte[] bytes = bos.toByteArray();
+            System.out.println("main() about to send bytesMessage with bytes[] size = "+bytes.length);
+            bMessage.writeBytes(bytes);
+            simpleProducer.send(bMessage);
 
         } catch(Exception x) {
             throw new RuntimeException(x);

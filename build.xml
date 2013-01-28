@@ -28,8 +28,8 @@
         <if>
             <not><equals arg1="${bounce.servers}" arg2="false" /></not>
             <then>
-                <antcall target="local.bounce.pfp.core" />
                 <antcall target="local.bounce.sy" />
+                <antcall target="local.bounce.pfp.core" />
             </then>
         </if>
     </target>
